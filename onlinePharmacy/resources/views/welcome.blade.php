@@ -660,115 +660,75 @@
 </section>
 
 <section class="products-section">
-  <div class="container">
+  <div class="container" id="productContainer">
     <h2 class="section-title">Popular Products</h2>
-    <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="product-card">
-          <span class="discount-badge">20% OFF</span>
-          <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=300" alt="Product" class="product-img">
-          <h4 class="product-name">Vitamin D3 Supplement - 5000 IU</h4>
-          <div class="product-price">
-            <span class="current-price">৳480</span>
-            <span class="old-price">৳600</span>
-          </div>
-          <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="product-card">
-          <span class="discount-badge">15% OFF</span>
-          <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=300" alt="Product" class="product-img">
-          <h4 class="product-name">Omega-3 Fish Oil - 1000mg</h4>
-          <div class="product-price">
-            <span class="current-price">৳850</span>
-            <span class="old-price">৳1000</span>
-          </div>
-          <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="product-card">
-          <span class="discount-badge">25% OFF</span>
-          <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=300" alt="Product" class="product-img">
-          <h4 class="product-name">Multivitamin Complex - 60 Tablets</h4>
-          <div class="product-price">
-            <span class="current-price">৳675</span>
-            <span class="old-price">৳900</span>
-          </div>
-          <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="product-card">
-          <span class="discount-badge">10% OFF</span>
-          <img src="https://images.unsplash.com/photo-1578496479914-7ef3b0193be3?w=300" alt="Product" class="product-img">
-          <h4 class="product-name">Calcium + Magnesium - 120 Capsules</h4>
-          <div class="product-price">
-            <span class="current-price">৳720</span>
-            <span class="old-price">৳800</span>
-          </div>
-          <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="product-card">
-          <span class="discount-badge">30% OFF</span>
-          <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=300" alt="Product" class="product-img">
-          <h4 class="product-name">Probiotic Supplement - 30 Billion CFU</h4>
-          <div class="product-price">
-            <span class="current-price">৳1050</span>
-            <span class="old-price">৳1500</span>
-          </div>
-          <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="product-card">
-          <span class="discount-badge">18% OFF</span>
-          <img src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=300" alt="Product" class="product-img">
-          <h4 class="product-name">Zinc Supplement - 50mg</h4>
-          <div class="product-price">
-            <span class="current-price">৳410</span>
-            <span class="old-price">৳500</span>
-          </div>
-          <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="product-card">
-          <span class="discount-badge">22% OFF</span>
-          <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=300" alt="Product" class="product-img">
-          <h4 class="product-name">Iron Supplement - 65mg</h4>
-          <div class="product-price">
-            <span class="current-price">৳390</span>
-            <span class="old-price">৳500</span>
-          </div>
-          <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="product-card">
-          <span class="discount-badge">12% OFF</span>
-          <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=300" alt="Product" class="product-img">
-          <h4 class="product-name">B-Complex Vitamin - 100 Tablets</h4>
-          <div class="product-price">
-            <span class="current-price">৳528</span>
-            <span class="old-price">৳600</span>
-          </div>
-          <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-        </div>
-      </div>
+    <div class="row" id="productRow">
+      <!-- Products will be loaded dynamically here -->
     </div>
   </div>
 </section>
+
+<script>
+// Laravel passes the products from database
+let products = @json($products);
+
+// Base URL for assets
+const baseUrl = "{{ asset('') }}";
+
+// Get the product row container
+let productRow = document.getElementById("productRow");
+
+// Dynamically add each product card
+products.forEach(product => {
+    // Create column div
+    let colDiv = document.createElement("div");
+    colDiv.className = "col-lg-3 col-md-4 col-sm-6";
+
+    // Calculate discount badge if applicable
+    let discountBadge = "";
+    if (product.discount_percentage && product.discount_percentage > 0) {
+        discountBadge = `<span class="discount-badge">${product.discount_percentage}% OFF</span>`;
+    }
+
+    // Generate image URL
+    let imageUrl = product.image ? baseUrl + product.image : 'https://via.placeholder.com/300x200?text=No+Image';
+
+    // Build the product card HTML
+    colDiv.innerHTML = `
+        <div class="product-card">
+            ${discountBadge}
+            <img src="${imageUrl}" 
+                 alt="${product.name}" 
+                 class="product-img"
+                 onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+            <h4 class="product-name">${product.name}</h4>
+            <div class="product-price">
+                <span class="current-price">৳${parseFloat(product.current_price).toFixed(2)}</span>
+                ${product.old_price && product.old_price > product.current_price ? 
+                    `<span class="old-price">৳${parseFloat(product.old_price).toFixed(2)}</span>` : 
+                    ""}
+            </div>
+            <button class="btn-add-cart">
+                <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+        </div>
+    `;
+
+    // Append to product row
+    productRow.appendChild(colDiv);
+});
+
+// If no products found
+if (products.length === 0) {
+    productRow.innerHTML = `
+        <div class="col-12 text-center py-5">
+            <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+            <h5 class="text-muted">No products available at the moment</h5>
+            <p class="text-muted">Please check back later</p>
+        </div>
+    `;
+}
+</script>
 
 <section class="offer-section">
   <div class="container">
