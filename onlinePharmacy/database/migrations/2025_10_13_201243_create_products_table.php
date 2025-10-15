@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('discount_percentage');
             $table->text('description');
             $table->string('category');
-           
+           $table->string('quantity');
             $table->timestamps();
         });
     }

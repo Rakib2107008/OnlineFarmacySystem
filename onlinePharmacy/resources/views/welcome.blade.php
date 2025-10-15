@@ -1,8 +1,6 @@
-@extends('layout')
+@extends('layouts.app')
 
-@section('title', 'Welcome - Pharmacy')
-
-@section('styles')
+@section('content')
 <style>
   .slider-sec {
     padding: 40px 0;
@@ -509,9 +507,7 @@
     background: #f57c00;
   }
 </style>
-@endsection
 
-@section('content')
 <section class="slider-sec">
   <div class="container">
     <div class="slider-wrap">
@@ -622,7 +618,7 @@
         </div>
         
         <div class="category-card">
-          <img src="Images/diabeticCare.jpg" alt="Diabetic Care" class="category-img">
+          <img src="{{ asset('Images/diabeticCare.jpg') }}" alt="Diabetic Care" class="category-img">
           <h3 class="category-name">Diabetic Care</h3>
         </div>
         
@@ -632,7 +628,7 @@
         </div>
         
         <div class="category-card">
-          <img src="Images/wellbeing.jpg" alt="Sexual Wellbeing" class="category-img">
+          <img src="{{ asset('Images/wellbeing.jpg') }}" alt="Sexual Wellbeing" class="category-img">
           <h3 class="category-name">Sexual Wellbeing</h3>
         </div>
         
@@ -642,7 +638,7 @@
         </div>
         
         <div class="category-card">
-          <img src="Images/WomenCare.webp" alt="Women Care" class="category-img">
+          <img src="{{ asset('Images/WomenCare.webp') }}" alt="Women Care" class="category-img">
           <h3 class="category-name">Women Care</h3>
         </div>
         
@@ -668,9 +664,39 @@
   </div>
 </section>
 
+<section class="offer-section">
+  <div class="container">
+    <h2 class="section-title" style="color: white; text-align: center; margin-bottom: 40px;">Special Offers</h2>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="offer-card">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600" alt="Offer" class="offer-img">
+          <div class="offer-content">
+            <h3 class="offer-title">Flat 50% Off on First Order</h3>
+            <p class="offer-text">Get amazing discounts on your first medicine purchase. Limited time offer!</p>
+            <button class="btn-offer">Shop Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="offer-card">
+          <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=600" alt="Offer" class="offer-img">
+          <div class="offer-content">
+            <h3 class="offer-title">Free Health Checkup</h3>
+            <p class="offer-text">Book your free health checkup with any purchase above ৳2000. Expert doctors available.</p>
+            <button class="btn-offer">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+@endsection
+
+@push('scripts')
 <script>
 // Laravel passes the products from database
-let products = @json($products);
+let products = @json($products ?? []);
 
 // Base URL for assets
 const baseUrl = "{{ asset('') }}";
@@ -728,38 +754,8 @@ if (products.length === 0) {
         </div>
     `;
 }
-</script>
 
-<section class="offer-section">
-  <div class="container">
-    <h2 class="section-title" style="color: white; text-align: center; margin-bottom: 40px;">Special Offers</h2>
-    <div class="row">
-      <div class="col-md-6 mb-4">
-        <div class="offer-card">
-          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600" alt="Offer" class="offer-img">
-          <div class="offer-content">
-            <h3 class="offer-title">Flat 50% Off on First Order</h3>
-            <p class="offer-text">Get amazing discounts on your first medicine purchase. Limited time offer!</p>
-            <button class="btn-offer">Shop Now</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-4">
-        <div class="offer-card">
-          <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=600" alt="Offer" class="offer-img">
-          <div class="offer-content">
-            <h3 class="offer-title">Free Health Checkup</h3>
-            <p class="offer-text">Book your free health checkup with any purchase above ৳2000. Expert doctors available.</p>
-            <button class="btn-offer">Book Now</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-@endsection
-
-@section('scripts')
+// Carousel initialization
 const carouselElement = document.getElementById('pharmacyCarousel');
 if (carouselElement) {
   const carousel = new bootstrap.Carousel(carouselElement, {
@@ -770,6 +766,7 @@ if (carouselElement) {
   });
 }
 
+// Category scrolling function
 function scrollCategories(direction) {
   const grid = document.getElementById('categoryGrid');
   const scrollAmount = 240;
@@ -781,6 +778,7 @@ function scrollCategories(direction) {
   }
 }
 
+// Cart functionality
 let cartItems = 0;
 let cartTotal = 0;
 
@@ -807,14 +805,14 @@ document.querySelectorAll('.btn-add-cart').forEach(button => {
 
 function updateCartDisplay() {
   document.querySelectorAll('.cart-badge').forEach(el => {
-    el.innerHTML = `<i class="fas fa-shopping-bag"></i> <span>${cartItems} Items</span>`;
+    el.innerHTML = `<i class="fas fa-shopping-bag"></i> ${cartItems} Items`;
   });
-  document.querySelectorAll('.cart-total, .cart-total-float').forEach(el => {
+  document.querySelectorAll('.cart-total').forEach(el => {
     el.textContent = `৳ ${cartTotal}`;
   });
-  document.querySelector('.cart-items').innerHTML = `<i class="fas fa-shopping-bag"></i><span>${cartItems} Items</span>`;
 }
 
+// Category card click
 document.querySelectorAll('.category-card').forEach(card => {
   card.addEventListener('click', function() {
     const categoryName = this.querySelector('.category-name').textContent;
@@ -822,6 +820,7 @@ document.querySelectorAll('.category-card').forEach(card => {
   });
 });
 
+// Offer buttons
 document.querySelectorAll('.btn-offer').forEach(button => {
   button.addEventListener('click', function() {
     const offerTitle = this.closest('.offer-content').querySelector('.offer-title').textContent;
@@ -829,6 +828,7 @@ document.querySelectorAll('.btn-offer').forEach(button => {
   });
 });
 
+// Price hover effect
 document.querySelectorAll('.current-price').forEach(price => {
   price.style.transition = 'all 0.3s ease';
   
@@ -843,6 +843,7 @@ document.querySelectorAll('.current-price').forEach(price => {
   });
 });
 
+// Intersection Observer for animations
 const observerOptions = {
   threshold: 0.1,
   rootMargin: '0px 0px -50px 0px'
@@ -864,6 +865,7 @@ document.querySelectorAll('.category-card, .product-card, .offer-card').forEach(
   observer.observe(card);
 });
 
+// Page load animation
 window.addEventListener('load', function() {
   console.log('✅ Welcome page loaded successfully');
   
@@ -876,4 +878,5 @@ window.addEventListener('load', function() {
     });
   }, 100);
 });
-@endsection
+</script>
+@endpush

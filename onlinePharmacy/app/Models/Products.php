@@ -21,6 +21,7 @@ class Products extends Model
         'discount_percentage',
         'description',
         'category',
+        'quantity',
     ];
 
     // ✅ Enable timestamps
