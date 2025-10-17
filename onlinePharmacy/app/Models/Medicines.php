@@ -9,21 +9,17 @@ class Medicines extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'description',
-        'category',
-        'price',
-        'discount_price',
-        'discount_percentage',
-        'stock',
-        'image'
-    ];
+    protected $table = 'medicines';
 
-    protected $casts = [
-        'price' => 'decimal:2',
-        'discount_price' => 'decimal:2',
-        'discount_percentage' => 'integer',
-        'stock' => 'integer'
+    protected $fillable = [
+        'name','category',
+        'image',
+        'current_price',
+        'old_price',
+        'discount_percentage',
+        'description',
+        'stock',
+        
     ];
+     public $timestamps = true;
 }

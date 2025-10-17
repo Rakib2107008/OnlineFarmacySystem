@@ -278,9 +278,353 @@
         margin-left: 0;
       }
     }
+
+    /* Top Header */
+    .top-header {
+      position: fixed;
+      top: 0;
+      left: 280px;
+      right: 0;
+      height: 70px;
+      background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+    }
+
+    .header-logo h2 {
+      color: white;
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .header-logo span {
+      color: #ffd700;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .header-search {
+      position: relative;
+    }
+
+    .header-search input {
+      width: 300px;
+      padding: 10px 40px 10px 15px;
+      border: none;
+      border-radius: 25px;
+      font-size: 14px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    .header-search input::placeholder {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .header-search button {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      color: #0066cc;
+      cursor: pointer;
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .header-location {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.2);
+      padding: 8px 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .header-location:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .header-location i {
+      color: white;
+      font-size: 16px;
+    }
+
+    .location-select {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      padding: 0;
+      min-width: 140px;
+    }
+
+    .location-select option {
+      background: #0066cc;
+      color: white;
+      padding: 10px;
+    }
+
+    .header-icon {
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      position: relative;
+      transition: .3s;
+    }
+
+    .header-icon:hover {
+      color: #ffd700;
+      transform: scale(1.1);
+    }
+
+    .badge-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #ff4757;
+      color: white;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .main-footer {
+      background: #1a1a1a;
+      color: #fff;
+      margin-left: 280px;
+      padding: 50px 0 20px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h3 {
+      color: #0066cc;
+      font-size: 18px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .footer-section p {
+      color: #bbb;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-section ul li a {
+      color: #bbb;
+      text-decoration: none;
+      transition: .3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-section ul li a:hover {
+      color: #0066cc;
+      padding-left: 5px;
+    }
+
+    .footer-section ul li a i {
+      font-size: 12px;
+    }
+
+    .footer-contact-info {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 15px;
+      color: #bbb;
+    }
+
+    .footer-contact-info i {
+      color: #0066cc;
+      margin-top: 3px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: .3s;
+    }
+
+    .footer-social a:hover {
+      background: #0066cc;
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .footer-bottom a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    /* Adjust main content for header */
+    .main-content {
+      margin-top: 70px;
+      padding: 30px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 991px) {
+      .top-header {
+        left: 0;
+        padding: 0 15px;
+      }
+
+      .header-search input {
+        width: 200px;
+      }
+
+      .header-logo h2 {
+        font-size: 18px;
+      }
+
+      .main-footer {
+        margin-left: 0;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-search {
+        display: none;
+      }
+
+      .header-location {
+        padding: 5px 10px;
+      }
+
+      .location-select {
+        min-width: 100px;
+        font-size: 12px;
+      }
+
+      .header-icon {
+        font-size: 18px;
+      }
+
+      .top-header {
+        height: 60px;
+      }
+
+      .main-content {
+        margin-top: 60px;
+        padding: 20px;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Top Header -->
+  <header class="top-header">
+    <div class="header-logo">
+      <h2><i class="fas fa-pills"></i> Online<span>Pharmacy</span></h2>
+    </div>
+    <div class="header-right">
+      <div class="header-search">
+        <input type="text" placeholder="Search medicines, products...">
+        <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="header-icons">
+        <div class="header-location">
+          <i class="fas fa-map-marker-alt"></i>
+          <select class="location-select">
+            <option value="">Select Location</option>
+            <option value="dhaka">Dhaka</option>
+            <option value="chittagong">Chittagong</option>
+            <option value="sylhet">Sylhet</option>
+            <option value="rajshahi">Rajshahi</option>
+            <option value="khulna">Khulna</option>
+            <option value="barisal">Barisal</option>
+            <option value="rangpur">Rangpur</option>
+            <option value="mymensingh">Mymensingh</option>
+          </select>
+        </div>
+        <div class="header-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="badge-count">0</span>
+        </div>
+        <div class="header-icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
   <!-- Mobile Toggle Button -->
   <button class="mobile-toggle" id="mobileToggle">
     <i class="fas fa-bars"></i>
@@ -374,6 +718,75 @@
   <div class="main-content">
     @yield('content')
   </div>
+
+  <!-- Footer Section -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-grid">
+        <!-- About Us -->
+        <div class="footer-section">
+          <h3><i class="fas fa-pills"></i> Online Pharmacy</h3>
+          <p>Your trusted online pharmacy for quality medicines and healthcare products. We deliver health to your doorstep with care and convenience.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="/"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="/medicines"><i class="fas fa-chevron-right"></i> Medicines</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Health Products</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Upload Prescription</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Track Order</a></li>
+          </ul>
+        </div>
+
+        <!-- Customer Service -->
+        <div class="footer-section">
+          <h3>Customer Service</h3>
+          <ul>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> My Account</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Order History</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Return Policy</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Terms & Conditions</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <div class="footer-contact-info">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>123 Pharmacy Street<br>Dhaka, Bangladesh</span>
+          </div>
+          <div class="footer-contact-info">
+            <i class="fas fa-phone-alt"></i>
+            <span>+880 1234-567890</span>
+          </div>
+          <div class="footer-contact-info">
+            <i class="fas fa-envelope"></i>
+            <span>info@onlinepharmacy.com</span>
+          </div>
+          <div class="footer-contact-info">
+            <i class="fas fa-clock"></i>
+            <span>24/7 Service Available</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 <a href="#">Online Pharmacy</a>. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: #ff4757;"></i> by Your Team</p>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   

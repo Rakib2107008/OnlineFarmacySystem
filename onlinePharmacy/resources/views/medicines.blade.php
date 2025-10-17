@@ -1,0 +1,1 @@
+﻿@include('components.product-listing', ['items' => $medicines, 'title' => 'All Medicines', 'emptyIcon' => 'fas fa-capsules', 'emptyTitle' => 'No medicines available at the moment', 'emptyMessage' => 'Please check back later for new products'])

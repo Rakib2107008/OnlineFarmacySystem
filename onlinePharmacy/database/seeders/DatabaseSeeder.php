@@ -23,6 +23,12 @@ class DatabaseSeeder extends Seeder
         // Call the ProductsTableSeeder
         $this->call([
             ProductsTableSeeder::class,
+           
+        ]);
+         
+         $this->call([
+            MedicinesTableSeeder::class,
+           
         ]);
     }
 }

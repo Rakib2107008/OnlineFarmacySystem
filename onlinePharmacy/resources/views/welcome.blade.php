@@ -612,20 +612,24 @@
       </button>
       
       <div class="category-grid" id="categoryGrid">
-        <div class="category-card">
-          <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400" alt="Medicines" class="category-img">
-          <h3 class="category-name">Medicines</h3>
-        </div>
-        
+        <!-- Medicine Category Card with Link -->
+        <a href="{{ route('medicines') }}" class="category-card-link">
+          <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400" alt="Medicines" class="category-img">
+            <h3 class="category-name">Medicines</h3>
+          </div>
+        </a>
+        <a href="{{ route('diabeticCare') }}" class="category-card1-link">
         <div class="category-card">
           <img src="{{ asset('Images/diabeticCare.jpg') }}" alt="Diabetic Care" class="category-img">
           <h3 class="category-name">Diabetic Care</h3>
         </div>
-        
+        </a>
+         <a href="{{ route('personalCare') }}" class="category-card1-link">
         <div class="category-card">
           <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400" alt="Personal Care" class="category-img">
           <h3 class="category-name">Personal Care</h3>
-        </div>
+        </div></a>
         
         <div class="category-card">
           <img src="{{ asset('Images/wellbeing.jpg') }}" alt="Sexual Wellbeing" class="category-img">
@@ -698,11 +702,18 @@
 // Laravel passes the products from database
 let products = @json($products ?? []);
 
+// Debug: Check for duplicates
+console.log('Total products:', products.length);
+console.log('Products data:', products);
+
 // Base URL for assets
 const baseUrl = "{{ asset('') }}";
 
 // Get the product row container
 let productRow = document.getElementById("productRow");
+
+// Clear any existing content first
+productRow.innerHTML = '';
 
 // Dynamically add each product card
 products.forEach(product => {
