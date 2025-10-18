@@ -40,6 +40,22 @@ Route::get('/diabeticCare', function () {
     return view('diabeticCare', compact('medicines'));
 })->name('diabeticCare');
 
+Route::get('/sexualWellbeing', function () {
+    $medicines = Medicines::where('category', 'Sexual Wellness')->paginate(12);
+    return view('sexualWellbeing', compact('medicines'));
+})->name('sexualWellbeing');
+Route::get('/vitaminSupplyments', function () {
+    $medicines = Medicines::where('category', 'Vitamin Supplements')->paginate(12);
+    return view('vitaminSupplyments', compact('medicines'));
+})->name('vitaminSupplyments');
+Route::get('/womenCare', function () {
+    $medicines = Medicines::where('category', 'Women Care')->paginate(12);
+    return view('womenCare', compact('medicines'));
+})->name('womenCare');
+Route::get('/babyMom', function () {
+    $medicines = Medicines::where('category', 'Baby & Mom')->paginate(12);
+    return view('babyMom', compact('medicines'));
+})->name('babyMom');
 // Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {
     

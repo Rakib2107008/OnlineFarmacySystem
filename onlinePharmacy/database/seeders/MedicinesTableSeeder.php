@@ -620,6 +620,802 @@ class MedicinesTableSeeder extends Seeder
                 'stock' => 125,
                 'image' => 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400'
             ],
+
+
+            [
+    'name' => 'Vitamin C 1000mg',
+    'description' => 'Immune booster with antioxidant properties for daily wellness',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 250.00,
+    'current_price' => 225.00,
+    'discount_percentage' => 10,
+    'stock' => 200,
+    'image' => 'https://images.unsplash.com/photo-1550572017-4814c9a0cc7f?w=400'
+],
+[
+    'name' => 'Vitamin D3 2000 IU',
+    'description' => 'Bone health support and calcium absorption enhancement',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 300.00,
+    'current_price' => 270.00,
+    'discount_percentage' => 10,
+    'stock' => 180,
+    'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400'
+],
+[
+    'name' => 'Multivitamin Complex',
+    'description' => 'Complete daily multivitamin with essential minerals and vitamins',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 450.00,
+    'current_price' => 405.00,
+    'discount_percentage' => 10,
+    'stock' => 150,
+    'image' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'
+],
+[
+    'name' => 'Omega-3 Fish Oil',
+    'description' => 'Heart health support with EPA and DHA fatty acids',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 550.00,
+    'current_price' => 495.00,
+    'discount_percentage' => 10,
+    'stock' => 130,
+    'image' => 'https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=400'
+],
+[
+    'name' => 'Vitamin B Complex',
+    'description' => 'Energy metabolism support with all B vitamins',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 320.00,
+    'current_price' => 288.00,
+    'discount_percentage' => 10,
+    'stock' => 170,
+    'image' => 'https://images.unsplash.com/photo-1550572017-4814c9a0cc7f?w=400'
+],
+[
+    'name' => 'Calcium + Magnesium',
+    'description' => 'Bone strength formula with vitamin D for better absorption',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 380.00,
+    'current_price' => 342.00,
+    'discount_percentage' => 10,
+    'stock' => 140,
+    'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400'
+],
+[
+    'name' => 'Zinc 50mg',
+    'description' => 'Immune system support and wound healing mineral',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 220.00,
+    'current_price' => 198.00,
+    'discount_percentage' => 10,
+    'stock' => 190,
+    'image' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'
+],
+[
+    'name' => 'Iron + Folic Acid',
+    'description' => 'Blood health supplement for anemia prevention',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 280.00,
+    'current_price' => 252.00,
+    'discount_percentage' => 10,
+    'stock' => 160,
+    'image' => 'https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=400'
+],
+[
+    'name' => 'Vitamin E 400 IU',
+    'description' => 'Antioxidant for skin health and cellular protection',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 350.00,
+    'current_price' => 315.00,
+    'discount_percentage' => 10,
+    'stock' => 145,
+    'image' => 'https://images.unsplash.com/photo-1550572017-4814c9a0cc7f?w=400'
+],
+[
+    'name' => 'Biotin 10000mcg',
+    'description' => 'Hair, skin, and nail health supplement',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 400.00,
+    'current_price' => 360.00,
+    'discount_percentage' => 10,
+    'stock' => 155,
+    'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400'
+],
+[
+    'name' => 'Collagen Peptides',
+    'description' => 'Skin elasticity and joint health support powder',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 800.00,
+    'current_price' => 720.00,
+    'discount_percentage' => 10,
+    'stock' => 90,
+    'image' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'
+],
+[
+    'name' => 'Probiotics 10 Billion CFU',
+    'description' => 'Digestive health and gut flora balance supplement',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 650.00,
+    'current_price' => 585.00,
+    'discount_percentage' => 10,
+    'stock' => 110,
+    'image' => 'https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=400'
+],
+[
+    'name' => 'Coenzyme Q10 100mg',
+    'description' => 'Heart health and energy production support',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 750.00,
+    'current_price' => 675.00,
+    'discount_percentage' => 10,
+    'stock' => 85,
+    'image' => 'https://images.unsplash.com/photo-1550572017-4814c9a0cc7f?w=400'
+],
+[
+    'name' => 'Glucosamine Chondroitin',
+    'description' => 'Joint health and cartilage support formula',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 700.00,
+    'current_price' => 630.00,
+    'discount_percentage' => 10,
+    'stock' => 100,
+    'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400'
+],
+[
+    'name' => 'Vitamin K2 + D3',
+    'description' => 'Bone and cardiovascular health combination',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 420.00,
+    'current_price' => 378.00,
+    'discount_percentage' => 10,
+    'stock' => 125,
+    'image' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'
+],
+[
+    'name' => 'Turmeric Curcumin',
+    'description' => 'Anti-inflammatory supplement with BioPerine for absorption',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 480.00,
+    'current_price' => 432.00,
+    'discount_percentage' => 10,
+    'stock' => 135,
+    'image' => 'https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=400'
+],
+[
+    'name' => 'Ashwagandha 600mg',
+    'description' => 'Stress relief and energy boost adaptogen supplement',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 520.00,
+    'current_price' => 468.00,
+    'discount_percentage' => 10,
+    'stock' => 120,
+    'image' => 'https://images.unsplash.com/photo-1550572017-4814c9a0cc7f?w=400'
+],
+[
+    'name' => 'Magnesium Glycinate 400mg',
+    'description' => 'Sleep support and muscle relaxation mineral',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 360.00,
+    'current_price' => 324.00,
+    'discount_percentage' => 10,
+    'stock' => 165,
+    'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400'
+],
+[
+    'name' => 'Apple Cider Vinegar Gummies',
+    'description' => 'Weight management and digestive health support',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 340.00,
+    'current_price' => 306.00,
+    'discount_percentage' => 10,
+    'stock' => 175,
+    'image' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'
+],
+[
+    'name' => 'L-Carnitine 1000mg',
+    'description' => 'Fat metabolism and energy production supplement',
+    'category' => 'Vitamin Supplements',
+    'old_price' => 580.00,
+    'current_price' => 522.00,
+    'discount_percentage' => 10,
+    'stock' => 95,
+    'image' => 'https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=400'
+],
+
+// Women Care Category (20 items)
+[
+    'name' => 'Prenatal Vitamins',
+    'description' => 'Complete nutrition support for pregnancy with folic acid and iron',
+    'category' => 'Women Care',
+    'old_price' => 600.00,
+    'current_price' => 540.00,
+    'discount_percentage' => 10,
+    'stock' => 120,
+    'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400'
+],
+[
+    'name' => 'Sanitary Pads Regular',
+    'description' => 'Ultra-soft cotton sanitary pads with wings (Pack of 10)',
+    'category' => 'Women Care',
+    'old_price' => 180.00,
+    'current_price' => 162.00,
+    'discount_percentage' => 10,
+    'stock' => 250,
+    'image' => 'https://images.unsplash.com/photo-1586041828039-d753b1962343?w=400'
+],
+[
+    'name' => 'Menstrual Cup',
+    'description' => 'Reusable medical-grade silicone menstrual cup',
+    'category' => 'Women Care',
+    'old_price' => 450.00,
+    'current_price' => 405.00,
+    'discount_percentage' => 10,
+    'stock' => 80,
+    'image' => 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400'
+],
+[
+    'name' => 'Intimate Wash pH Balanced',
+    'description' => 'Gentle feminine hygiene wash with natural ingredients',
+    'category' => 'Women Care',
+    'old_price' => 320.00,
+    'current_price' => 288.00,
+    'discount_percentage' => 10,
+    'stock' => 150,
+    'image' => 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400'
+],
+[
+    'name' => 'Evening Primrose Oil',
+    'description' => 'Hormonal balance and PMS relief supplement',
+    'category' => 'Women Care',
+    'old_price' => 550.00,
+    'current_price' => 495.00,
+    'discount_percentage' => 10,
+    'stock' => 100,
+    'image' => 'https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=400'
+],
+[
+    'name' => 'Folic Acid 5mg',
+    'description' => 'Essential supplement for pregnancy planning and neural development',
+    'category' => 'Women Care',
+    'old_price' => 200.00,
+    'current_price' => 180.00,
+    'discount_percentage' => 10,
+    'stock' => 180,
+    'image' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'
+],
+[
+    'name' => 'Pregnancy Test Kit (3 pcs)',
+    'description' => 'Early detection home pregnancy test with 99% accuracy',
+    'category' => 'Women Care',
+    'old_price' => 280.00,
+    'current_price' => 252.00,
+    'discount_percentage' => 10,
+    'stock' => 200,
+    'image' => 'https://images.unsplash.com/photo-1615461066841-6116e61058f4?w=400'
+],
+[
+    'name' => 'Ovulation Test Strips',
+    'description' => 'Fertility tracking strips for ovulation prediction (Pack of 10)',
+    'category' => 'Women Care',
+    'old_price' => 350.00,
+    'current_price' => 315.00,
+    'discount_percentage' => 10,
+    'stock' => 130,
+    'image' => 'https://images.unsplash.com/photo-1615461066159-fea0960485d5?w=400'
+],
+[
+    'name' => 'Cranberry Extract Capsules',
+    'description' => 'Urinary tract health support for women',
+    'category' => 'Women Care',
+    'old_price' => 420.00,
+    'current_price' => 378.00,
+    'discount_percentage' => 10,
+    'stock' => 110,
+    'image' => 'https://images.unsplash.com/photo-1550572017-4814c9a0cc7f?w=400'
+],
+[
+    'name' => 'Iron Supplement for Women',
+    'description' => 'Gentle iron formula for menstrual blood loss support',
+    'category' => 'Women Care',
+    'old_price' => 300.00,
+    'current_price' => 270.00,
+    'discount_percentage' => 10,
+    'stock' => 160,
+    'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400'
+],
+[
+    'name' => 'Breast Pads Disposable',
+    'description' => 'Ultra-absorbent nursing pads for breastfeeding (Pack of 30)',
+    'category' => 'Women Care',
+    'old_price' => 250.00,
+    'current_price' => 225.00,
+    'discount_percentage' => 10,
+    'stock' => 140,
+    'image' => 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400'
+],
+[
+    'name' => 'Vaginal Moisturizer',
+    'description' => 'Long-lasting intimate moisture relief gel',
+    'category' => 'Women Care',
+    'old_price' => 480.00,
+    'current_price' => 432.00,
+    'discount_percentage' => 10,
+    'stock' => 90,
+    'image' => 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400'
+],
+[
+    'name' => 'Calcium + Vitamin D for Women',
+    'description' => 'Bone health formula designed for women\'s needs',
+    'category' => 'Women Care',
+    'old_price' => 380.00,
+    'current_price' => 342.00,
+    'discount_percentage' => 10,
+    'stock' => 155,
+    'image' => 'https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=400'
+],
+[
+    'name' => 'Panty Liners Unscented',
+    'description' => 'Daily freshness ultra-thin panty liners (Pack of 20)',
+    'category' => 'Women Care',
+    'old_price' => 150.00,
+    'current_price' => 135.00,
+    'discount_percentage' => 10,
+    'stock' => 220,
+    'image' => 'https://images.unsplash.com/photo-1586041828039-d753b1962343?w=400'
+],
+[
+    'name' => 'Hair Skin Nails Formula',
+    'description' => 'Beauty supplement with biotin and collagen for women',
+    'category' => 'Women Care',
+    'old_price' => 520.00,
+    'current_price' => 468.00,
+    'discount_percentage' => 10,
+    'stock' => 125,
+    'image' => 'https://images.unsplash.com/photo-1550572017-4814c9a0cc7f?w=400'
+],
+[
+    'name' => 'Menopause Support Formula',
+    'description' => 'Natural relief for hot flashes and hormonal changes',
+    'category' => 'Women Care',
+    'old_price' => 650.00,
+    'current_price' => 585.00,
+    'discount_percentage' => 10,
+    'stock' => 85,
+    'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400'
+],
+[
+    'name' => 'Kegel Exercise Balls',
+    'description' => 'Pelvic floor strengthening device for women',
+    'category' => 'Women Care',
+    'old_price' => 800.00,
+    'current_price' => 720.00,
+    'discount_percentage' => 10,
+    'stock' => 60,
+    'image' => 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400'
+],
+[
+    'name' => 'Feminine Wipes',
+    'description' => 'Gentle cleansing wipes for intimate care (Pack of 20)',
+    'category' => 'Women Care',
+    'old_price' => 220.00,
+    'current_price' => 198.00,
+    'discount_percentage' => 10,
+    'stock' => 190,
+    'image' => 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400'
+],
+[
+    'name' => 'Period Pain Relief Patch',
+    'description' => 'Heat therapy patches for menstrual cramp relief (Pack of 5)',
+    'category' => 'Women Care',
+    'old_price' => 280.00,
+    'current_price' => 252.00,
+    'discount_percentage' => 10,
+    'stock' => 175,
+    'image' => 'https://images.unsplash.com/photo-1586041828039-d753b1962343?w=400'
+],
+[
+    'name' => 'Collagen Drink for Women',
+    'description' => 'Anti-aging beauty drink with marine collagen',
+    'category' => 'Women Care',
+    'old_price' => 900.00,
+    'current_price' => 810.00,
+    'discount_percentage' => 10,
+    'stock' => 70,
+    'image' => 'https://images.unsplash.com/photo-1550572017-4814c9a0cc7f?w=400'
+],
+
+// Baby & Mom Category (20 items)
+[
+    'name' => 'Baby Diapers Size M',
+    'description' => 'Ultra-absorbent disposable diapers with wetness indicator (Pack of 44)',
+    'category' => 'Baby & Mom',
+    'old_price' => 850.00,
+    'current_price' => 765.00,
+    'discount_percentage' => 10,
+    'stock' => 200,
+    'image' => 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400'
+],
+[
+    'name' => 'Baby Wipes Sensitive',
+    'description' => 'Alcohol-free gentle wipes for newborn sensitive skin (Pack of 80)',
+    'category' => 'Baby & Mom',
+    'old_price' => 280.00,
+    'current_price' => 252.00,
+    'discount_percentage' => 10,
+    'stock' => 300,
+    'image' => 'https://images.unsplash.com/photo-1584931423298-c576fda54bd2?w=400'
+],
+[
+    'name' => 'Baby Formula Milk 0-6M',
+    'description' => 'Stage 1 infant formula with DHA and probiotics (400g)',
+    'category' => 'Baby & Mom',
+    'old_price' => 1200.00,
+    'current_price' => 1080.00,
+    'discount_percentage' => 10,
+    'stock' => 150,
+    'image' => 'https://images.unsplash.com/photo-1586041828039-d753b1962343?w=400'
+],
+[
+    'name' => 'Baby Bottle BPA Free',
+    'description' => 'Anti-colic feeding bottle with slow flow nipple (250ml)',
+    'category' => 'Baby & Mom',
+    'old_price' => 450.00,
+    'current_price' => 405.00,
+    'discount_percentage' => 10,
+    'stock' => 180,
+    'image' => 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400'
+],
+[
+    'name' => 'Breast Pump Electric',
+    'description' => 'Double electric breast pump with massage mode',
+    'category' => 'Baby & Mom',
+    'old_price' => 3500.00,
+    'current_price' => 3150.00,
+    'discount_percentage' => 10,
+    'stock' => 45,
+    'image' => 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400'
+],
+[
+    'name' => 'Baby Shampoo Tear-Free',
+    'description' => 'Gentle hypoallergenic baby shampoo with natural ingredients',
+    'category' => 'Baby & Mom',
+    'old_price' => 320.00,
+    'current_price' => 288.00,
+    'discount_percentage' => 10,
+    'stock' => 220,
+    'image' => 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400'
+],
+[
+    'name' => 'Baby Lotion Moisturizing',
+    'description' => 'Non-greasy baby lotion for soft and smooth skin',
+    'category' => 'Baby & Mom',
+    'old_price' => 350.00,
+    'current_price' => 315.00,
+    'discount_percentage' => 10,
+    'stock' => 200,
+    'image' => 'https://images.unsplash.com/photo-1584931423298-c576fda54bd2?w=400'
+],
+[
+    'name' => 'Diaper Rash Cream',
+    'description' => 'Zinc oxide barrier cream for diaper rash treatment',
+    'category' => 'Baby & Mom',
+    'old_price' => 280.00,
+    'current_price' => 252.00,
+    'discount_percentage' => 10,
+    'stock' => 190,
+    'image' => 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400'
+],
+[
+    'name' => 'Baby Thermometer Digital',
+    'description' => 'Fast and accurate forehead thermometer with fever alarm',
+    'category' => 'Baby & Mom',
+    'old_price' => 800.00,
+    'current_price' => 720.00,
+    'discount_percentage' => 10,
+    'stock' => 110,
+    'image' => 'https://images.unsplash.com/photo-1615461066159-fea0960485d5?w=400'
+],
+[
+    'name' => 'Baby Nail Clipper Set',
+    'description' => 'Safe nail care set with scissors and file for newborns',
+    'category' => 'Baby & Mom',
+    'old_price' => 250.00,
+    'current_price' => 225.00,
+    'discount_percentage' => 10,
+    'stock' => 160,
+    'image' => 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400'
+],
+[
+    'name' => 'Baby Vitamin D Drops',
+    'description' => 'Essential vitamin D3 supplement for infants (400 IU)',
+    'category' => 'Baby & Mom',
+    'old_price' => 380.00,
+    'current_price' => 342.00,
+    'discount_percentage' => 10,
+    'stock' => 140,
+    'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400'
+],
+[
+    'name' => 'Pacifier Orthodontic',
+    'description' => 'Silicone pacifier promoting proper oral development (0-6M)',
+    'category' => 'Baby & Mom',
+    'old_price' => 180.00,
+    'current_price' => 162.00,
+    'discount_percentage' => 10,
+    'stock' => 250,
+    'image' => 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400'
+],
+[
+    'name' => 'Baby Bath Tub',
+    'description' => 'Foldable baby bathtub with temperature indicator',
+    'category' => 'Baby & Mom',
+    'old_price' => 1500.00,
+    'current_price' => 1350.00,
+    'discount_percentage' => 10,
+    'stock' => 60,
+    'image' => 'https://images.unsplash.com/photo-1584931423298-c576fda54bd2?w=400'
+],
+[
+    'name' => 'Nursing Pillow',
+    'description' => 'Ergonomic breastfeeding support pillow with washable cover',
+    'category' => 'Baby & Mom',
+    'old_price' => 1200.00,
+    'current_price' => 1080.00,
+    'discount_percentage' => 10,
+    'stock' => 75,
+    'image' => 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400'
+],
+[
+    'name' => 'Baby Powder Talc-Free',
+    'description' => 'Safe cornstarch-based baby powder for moisture control',
+    'category' => 'Baby & Mom',
+    'old_price' => 220.00,
+    'current_price' => 198.00,
+    'discount_percentage' => 10,
+    'stock' => 210,
+    'image' => 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400'
+],
+[
+    'name' => 'Baby Food Maker',
+    'description' => 'All-in-one steamer and blender for homemade baby food',
+    'category' => 'Baby & Mom',
+    'old_price' => 2800.00,
+    'current_price' => 2520.00,
+    'discount_percentage' => 10,
+    'stock' => 50,
+    'image' => 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400'
+],
+[
+    'name' => 'Baby Monitor Audio',
+    'description' => 'Two-way audio baby monitor with night light',
+    'category' => 'Baby & Mom',
+    'old_price' => 2200.00,
+    'current_price' => 1980.00,
+    'discount_percentage' => 10,
+    'stock' => 55,
+    'image' => 'https://images.unsplash.com/photo-1615461066159-fea0960485d5?w=400'
+],
+[
+    'name' => 'Baby Carrier Wrap',
+    'description' => 'Adjustable baby carrier for newborn to toddler',
+    'category' => 'Baby & Mom',
+    'old_price' => 1800.00,
+    'current_price' => 1620.00,
+    'discount_percentage' => 10,
+    'stock' => 90,
+    'image' => 'https://images.unsplash.com/photo-1584931423298-c576fda54bd2?w=400'
+],
+[
+    'name' => 'Teething Gel Natural',
+    'description' => 'Soothing benzocaine-free gel for teething pain relief',
+    'category' => 'Baby & Mom',
+    'old_price' => 320.00,
+    'current_price' => 288.00,
+    'discount_percentage' => 10,
+    'stock' => 170,
+    'image' => 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400'
+],
+ [
+                'name' => 'Condoms Ultra Thin',
+                'description' => 'Premium latex condoms for enhanced sensitivity (Pack of 12)',
+                'category' => 'Sexual Wellness',
+                'old_price' => 300.00,
+                'current_price' => 270.00,
+                'discount_percentage' => 10,
+                'stock' => 250,
+                'image' => 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400'
+            ],
+            [
+                'name' => 'Personal Lubricant Water-Based',
+                'description' => 'Long-lasting intimate lubricant for enhanced comfort',
+                'category' => 'Sexual Wellness',
+                'old_price' => 450.00,
+                'current_price' => 405.00,
+                'discount_percentage' => 10,
+                'stock' => 180,
+                'image' => 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400'
+            ],
+            [
+                'name' => 'Testosterone Booster',
+                'description' => 'Natural male vitality supplement with herbs and minerals',
+                'category' => 'Sexual Wellness',
+                'old_price' => 850.00,
+                'current_price' => 765.00,
+                'discount_percentage' => 10,
+                'stock' => 100,
+                'image' => 'https://images.unsplash.com/photo-1550572017-4814c9a0cc7f?w=400'
+            ],
+            [
+                'name' => 'Maca Root Extract',
+                'description' => 'Energy and libido support supplement for men and women',
+                'category' => 'Sexual Wellness',
+                'old_price' => 680.00,
+                'current_price' => 612.00,
+                'discount_percentage' => 10,
+                'stock' => 120,
+                'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400'
+            ],
+            [
+                'name' => 'Condoms Dotted & Ribbed',
+                'description' => 'Textured condoms for extra pleasure (Pack of 10)',
+                'category' => 'Sexual Wellness',
+                'old_price' => 350.00,
+                'current_price' => 315.00,
+                'discount_percentage' => 10,
+                'stock' => 220,
+                'image' => 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400'
+            ],
+            [
+                'name' => 'Delay Spray for Men',
+                'description' => 'Desensitizing spray for premature ejaculation control',
+                'category' => 'Sexual Wellness',
+                'old_price' => 750.00,
+                'current_price' => 675.00,
+                'discount_percentage' => 10,
+                'stock' => 90,
+                'image' => 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400'
+            ],
+            [
+                'name' => 'Sildenafil 50mg',
+                'description' => 'Erectile dysfunction medication for improved performance',
+                'category' => 'Sexual Wellness',
+                'old_price' => 400.00,
+                'current_price' => 360.00,
+                'discount_percentage' => 10,
+                'stock' => 150,
+                'image' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'
+            ],
+            [
+                'name' => 'Tadalafil 20mg',
+                'description' => 'Long-acting ED medication for up to 36 hours',
+                'category' => 'Sexual Wellness',
+                'old_price' => 500.00,
+                'current_price' => 450.00,
+                'discount_percentage' => 10,
+                'stock' => 130,
+                'image' => 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400'
+            ],
+            [
+                'name' => 'Arousal Gel for Women',
+                'description' => 'Intimate sensation gel for enhanced arousal',
+                'category' => 'Sexual Wellness',
+                'old_price' => 550.00,
+                'current_price' => 495.00,
+                'discount_percentage' => 10,
+                'stock' => 110,
+                'image' => 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400'
+            ],
+            [
+                'name' => 'L-Arginine 1000mg',
+                'description' => 'Amino acid supplement for blood flow and stamina',
+                'category' => 'Sexual Wellness',
+                'old_price' => 520.00,
+                'current_price' => 468.00,
+                'discount_percentage' => 10,
+                'stock' => 140,
+                'image' => 'https://images.unsplash.com/photo-1550572017-4814c9a0cc7f?w=400'
+            ],
+            [
+                'name' => 'Condoms Extra Large',
+                'description' => 'Larger size premium condoms for comfort (Pack of 10)',
+                'category' => 'Sexual Wellness',
+                'old_price' => 380.00,
+                'current_price' => 342.00,
+                'discount_percentage' => 10,
+                'stock' => 200,
+                'image' => 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400'
+            ],
+            [
+                'name' => 'Horny Goat Weed Extract',
+                'description' => 'Traditional herbal supplement for vitality and energy',
+                'category' => 'Sexual Wellness',
+                'old_price' => 620.00,
+                'current_price' => 558.00,
+                'discount_percentage' => 10,
+                'stock' => 95,
+                'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400'
+            ],
+            [
+                'name' => 'Massage Oil Sensual',
+                'description' => 'Warming massage oil with natural aphrodisiac oils',
+                'category' => 'Sexual Wellness',
+                'old_price' => 480.00,
+                'current_price' => 432.00,
+                'discount_percentage' => 10,
+                'stock' => 160,
+                'image' => 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400'
+            ],
+            [
+                'name' => 'Zinc + Magnesium Complex',
+                'description' => 'Mineral supplement for testosterone production support',
+                'category' => 'Sexual Wellness',
+                'old_price' => 420.00,
+                'current_price' => 378.00,
+                'discount_percentage' => 10,
+                'stock' => 175,
+                'image' => 'https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=400'
+            ],
+            [
+                'name' => 'Condoms Flavored Variety',
+                'description' => 'Assorted flavored condoms for oral pleasure (Pack of 12)',
+                'category' => 'Sexual Wellness',
+                'old_price' => 320.00,
+                'current_price' => 288.00,
+                'discount_percentage' => 10,
+                'stock' => 230,
+                'image' => 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400'
+            ],
+            [
+                'name' => 'Tribulus Terrestris 1000mg',
+                'description' => 'Natural testosterone and athletic performance booster',
+                'category' => 'Sexual Wellness',
+                'old_price' => 580.00,
+                'current_price' => 522.00,
+                'discount_percentage' => 10,
+                'stock' => 105,
+                'image' => 'https://images.unsplash.com/photo-1550572017-4814c9a0cc7f?w=400'
+            ],
+            [
+                'name' => 'Silicone Lubricant',
+                'description' => 'Long-lasting premium silicone-based intimate lubricant',
+                'category' => 'Sexual Wellness',
+                'old_price' => 650.00,
+                'current_price' => 585.00,
+                'discount_percentage' => 10,
+                'stock' => 125,
+                'image' => 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400'
+            ],
+            [
+                'name' => 'Female Libido Enhancer',
+                'description' => 'Natural herbal blend for women\'s desire and arousal',
+                'category' => 'Sexual Wellness',
+                'old_price' => 720.00,
+                'current_price' => 648.00,
+                'discount_percentage' => 10,
+                'stock' => 85,
+                'image' => 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400'
+            ],
+            [
+                'name' => 'Prostate Support Formula',
+                'description' => 'Saw palmetto and zinc for men\'s prostate health',
+                'category' => 'Sexual Wellness',
+                'old_price' => 780.00,
+                'current_price' => 702.00,
+                'discount_percentage' => 10,
+                'stock' => 115,
+                'image' => 'https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=400'
+            ],
+            [
+                'name' => 'Fertility Support for Men',
+                'description' => 'Comprehensive male fertility supplement with antioxidants',
+                'category' => 'Sexual Wellness',
+                'old_price' => 850.00,
+                'current_price' => 765.00,
+                'discount_percentage' => 10,
+                'stock' => 95,
+                'image' => 'https://images.unsplash.com/photo-1550572017-4814c9a0cc7f?w=400'
+            ],
         ];
 
 

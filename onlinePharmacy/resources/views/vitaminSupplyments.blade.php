@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <style>
@@ -404,7 +404,7 @@ document.addEventListener('click', function(e) {
         const button = e.target.closest('.btn-add-cart');
         const productCard = button.closest('.product-card');
         
-        console.log('🖱️ Medicines page: Add to Cart clicked');
+        console.log(' Medicines page: Add to Cart clicked');
         
         const productName = productCard.querySelector('.product-name').textContent.trim();
         const priceText = productCard.querySelector('.current-price').textContent;
@@ -414,7 +414,7 @@ document.addEventListener('click', function(e) {
         const priceAttr = button.getAttribute('data-product-price');
         const price = toNumber(priceAttr ?? priceText, 0);
         
-        console.log(`📦 Medicines parsed: id=${productId}, name=${productName}, price=${price}`);
+        console.log(` Medicines parsed: id=${productId}, name=${productName}, price=${price}`);
         
         // Use global floating cart with medicine_T tableType
         if (window.addToFloatingCart && typeof window.addToFloatingCart === 'function') {

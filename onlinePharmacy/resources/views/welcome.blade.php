@@ -612,44 +612,46 @@
       </button>
       
       <div class="category-grid" id="categoryGrid">
-        <!-- Medicine Category Card with Link -->
-        <a href="{{ route('medicines') }}" class="category-card-link">
-          <div class="category-card">
-            <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400" alt="Medicines" class="category-img">
-            <h3 class="category-name">Medicines</h3>
-          </div>
-        </a>
-        <a href="{{ route('diabeticCare') }}" class="category-card1-link">
+        <a href="{{ route('medicines') }}" class="categoryLink">
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400" alt="Medicines" class="category-img">
+          <h3 class="category-name">Medicines</h3>
+        </div></a>
+        <a href="{{ route('diabeticCare') }}" class="categoryLink">
         <div class="category-card">
           <img src="{{ asset('Images/diabeticCare.jpg') }}" alt="Diabetic Care" class="category-img">
           <h3 class="category-name">Diabetic Care</h3>
         </div>
         </a>
-         <a href="{{ route('personalCare') }}" class="category-card1-link">
+        <a href="{{ route('personalCare') }}" class="categoryLink">
         <div class="category-card">
           <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400" alt="Personal Care" class="category-img">
           <h3 class="category-name">Personal Care</h3>
-        </div></a>
-        
+        </div>
+        </a>
+        <a href="{{ route('sexualWellbeing') }}" class="categoryLink">
         <div class="category-card">
           <img src="{{ asset('Images/wellbeing.jpg') }}" alt="Sexual Wellbeing" class="category-img">
           <h3 class="category-name">Sexual Wellbeing</h3>
         </div>
-        
+        </a>
+        <a href="{{ route('vitaminSupplyments') }}" class="categoryLink">
         <div class="category-card">
           <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400" alt="Vitamin & Supplements" class="category-img">
           <h3 class="category-name">Vitamin & Supplements</h3>
-        </div>
-        
+        </div></a>
+        <a href="{{ route('womenCare') }}" class="categoryLink">
         <div class="category-card">
           <img src="{{ asset('Images/WomenCare.webp') }}" alt="Women Care" class="category-img">
           <h3 class="category-name">Women Care</h3>
         </div>
-        
+        </a>
+        <a href="{{ route('babyMom') }}" class="categoryLink">
         <div class="category-card">
           <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400" alt="Baby & Mom" class="category-img">
           <h3 class="category-name">Baby & Mom</h3>
         </div>
+        </a>
       </div>
       
       <button class="slider-btn next-btn" onclick="scrollCategories('right')">
@@ -702,18 +704,11 @@
 // Laravel passes the products from database
 let products = @json($products ?? []);
 
-// Debug: Check for duplicates
-console.log('Total products:', products.length);
-console.log('Products data:', products);
-
 // Base URL for assets
 const baseUrl = "{{ asset('') }}";
 
 // Get the product row container
 let productRow = document.getElementById("productRow");
-
-// Clear any existing content first
-productRow.innerHTML = '';
 
 // Dynamically add each product card
 products.forEach(product => {
