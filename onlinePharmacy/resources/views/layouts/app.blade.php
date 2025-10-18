@@ -180,21 +180,10 @@
       font-size: 18px;
     }
 
-    .social-icons .facebook { 
-      background: #1877f2; 
-    }
-
-    .social-icons .twitter { 
-      background: #1da1f2; 
-    }
-
-    .social-icons .youtube { 
-      background: #ff0000; 
-    }
-
-    .social-icons .linkedin { 
-      background: #0077b5; 
-    }
+    .social-icons .facebook { background: #1877f2; }
+    .social-icons .twitter  { background: #1da1f2; }
+    .social-icons .youtube  { background: #ff0000; }
+    .social-icons .linkedin  { background: #0077b5; }
 
     .app-promo {
       background: #f0f8ff;
@@ -258,25 +247,11 @@
 
     /* Responsive - Mobile */
     @media (max-width: 991px) {
-      .sidebar {
-        transform: translateX(-100%);
-      }
-
-      .sidebar.active {
-        transform: translateX(0);
-      }
-
-      .sidebar-overlay.active {
-        display: block;
-      }
-
-      .mobile-toggle {
-        display: block;
-      }
-
-      .main-content {
-        margin-left: 0;
-      }
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.active { transform: translateX(0); }
+      .sidebar-overlay.active { display: block; }
+      .mobile-toggle { display: block; }
+      .main-content { margin-left: 0; }
     }
 
     /* Top Header */
@@ -302,20 +277,11 @@
       font-weight: 700;
     }
 
-    .header-logo span {
-      color: #ffd700;
-    }
+    .header-logo span { color: #ffd700; }
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
+    .header-right { display: flex; align-items: center; gap: 25px; }
 
-    .header-search {
-      position: relative;
-    }
-
+    .header-search { position: relative; }
     .header-search input {
       width: 300px;
       padding: 10px 40px 10px 15px;
@@ -325,266 +291,76 @@
       background: rgba(255,255,255,0.2);
       color: white;
     }
-
-    .header-search input::placeholder {
-      color: rgba(255,255,255,0.8);
-    }
-
+    .header-search input::placeholder { color: rgba(255,255,255,0.8); }
     .header-search button {
-      position: absolute;
-      right: 5px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: white;
-      border: none;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      color: #0066cc;
-      cursor: pointer;
+      position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
+      background: white; border: none; width: 35px; height: 35px; border-radius: 50%;
+      color: #0066cc; cursor: pointer;
     }
 
-    .header-icons {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
-
+    .header-icons { display: flex; gap: 20px; align-items: center; }
     .header-location {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.2);
-      padding: 8px 15px;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: .3s;
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 25px;
+      cursor: pointer; transition: .3s;
     }
-
-    .header-location:hover {
-      background: rgba(255,255,255,0.3);
-    }
-
-    .header-location i {
-      color: white;
-      font-size: 16px;
-    }
+    .header-location:hover { background: rgba(255,255,255,0.3); }
+    .header-location i { color: white; font-size: 16px; }
 
     .location-select {
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      outline: none;
-      padding: 0;
-      min-width: 140px;
+      background: transparent; border: none; color: white; font-size: 14px;
+      font-weight: 600; cursor: pointer; outline: none; padding: 0; min-width: 140px;
     }
+    .location-select option { background: #0066cc; color: white; padding: 10px; }
 
-    .location-select option {
-      background: #0066cc;
-      color: white;
-      padding: 10px;
-    }
-
-    .header-icon {
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-      position: relative;
-      transition: .3s;
-    }
-
-    .header-icon:hover {
-      color: #ffd700;
-      transform: scale(1.1);
-    }
+    .header-icon { color: white; font-size: 20px; cursor: pointer; position: relative; transition: .3s; }
+    .header-icon:hover { color: #ffd700; transform: scale(1.1); }
 
     .badge-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: #ff4757;
-      color: white;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
+      position: absolute; top: -8px; right: -8px; background: #ff4757; color: white;
+      width: 18px; height: 18px; border-radius: 50%; font-size: 11px; display: flex;
+      align-items: center; justify-content: center; font-weight: 600;
     }
 
     /* Footer */
     .main-footer {
-      background: #1a1a1a;
-      color: #fff;
-      margin-left: 280px;
-      padding: 50px 0 20px;
+      background: #1a1a1a; color: #fff; margin-left: 280px; padding: 50px 0 20px;
     }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-
-    .footer-section h3 {
-      color: #0066cc;
-      font-size: 18px;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-
-    .footer-section p {
-      color: #bbb;
-      line-height: 1.8;
-      margin-bottom: 15px;
-    }
-
-    .footer-section ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .footer-section ul li {
-      margin-bottom: 12px;
-    }
-
-    .footer-section ul li a {
-      color: #bbb;
-      text-decoration: none;
-      transition: .3s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .footer-section ul li a:hover {
-      color: #0066cc;
-      padding-left: 5px;
-    }
-
-    .footer-section ul li a i {
-      font-size: 12px;
-    }
-
-    .footer-contact-info {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 15px;
-      color: #bbb;
-    }
-
-    .footer-contact-info i {
-      color: #0066cc;
-      margin-top: 3px;
-    }
-
-    .footer-social {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .footer-social a {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-decoration: none;
-      transition: .3s;
-    }
-
-    .footer-social a:hover {
-      background: #0066cc;
-      transform: translateY(-3px);
-    }
-
-    .footer-bottom {
-      border-top: 1px solid #333;
-      padding-top: 20px;
-      text-align: center;
-      color: #888;
-      font-size: 14px;
-    }
-
-    .footer-bottom a {
-      color: #0066cc;
-      text-decoration: none;
-    }
+    .footer-content { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+    .footer-section h3 { color: #0066cc; font-size: 18px; margin-bottom: 20px; font-weight: 600; }
+    .footer-section p { color: #bbb; line-height: 1.8; margin-bottom: 15px; }
+    .footer-section ul { list-style: none; padding: 0; }
+    .footer-section ul li { margin-bottom: 12px; }
+    .footer-section ul li a { color: #bbb; text-decoration: none; transition: .3s; display: flex; align-items: center; gap: 8px; }
+    .footer-section ul li a:hover { color: #0066cc; padding-left: 5px; }
+    .footer-section ul li a i { font-size: 12px; }
+    .footer-contact-info { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 15px; color: #bbb; }
+    .footer-contact-info i { color: #0066cc; margin-top: 3px; }
+    .footer-social { display: flex; gap: 15px; margin-top: 20px; }
+    .footer-social a { width: 40px; height: 40px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: .3s; }
+    .footer-social a:hover { background: #0066cc; transform: translateY(-3px); }
+    .footer-bottom { border-top: 1px solid #333; padding-top: 20px; text-align: center; color: #888; font-size: 14px; }
+    .footer-bottom a { color: #0066cc; text-decoration: none; }
 
     /* Adjust main content for header */
-    .main-content {
-      margin-top: 70px;
-      padding: 30px;
-    }
+    .main-content { margin-top: 70px; padding: 30px; }
 
     /* Responsive adjustments */
     @media (max-width: 991px) {
-      .top-header {
-        left: 0;
-        padding: 0 15px;
-      }
-
-      .header-search input {
-        width: 200px;
-      }
-
-      .header-logo h2 {
-        font-size: 18px;
-      }
-
-      .main-footer {
-        margin-left: 0;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
+      .top-header { left: 0; padding: 0 15px; }
+      .header-search input { width: 200px; }
+      .header-logo h2 { font-size: 18px; }
+      .main-footer { margin-left: 0; }
+      .footer-grid { grid-template-columns: 1fr; gap: 30px; }
     }
-
     @media (max-width: 768px) {
-      .header-search {
-        display: none;
-      }
-
-      .header-location {
-        padding: 5px 10px;
-      }
-
-      .location-select {
-        min-width: 100px;
-        font-size: 12px;
-      }
-
-      .header-icon {
-        font-size: 18px;
-      }
-
-      .top-header {
-        height: 60px;
-      }
-
-      .main-content {
-        margin-top: 60px;
-        padding: 20px;
-      }
+      .header-search { display: none; }
+      .header-location { padding: 5px 10px; }
+      .location-select { min-width: 100px; font-size: 12px; }
+      .header-icon { font-size: 18px; }
+      .top-header { height: 60px; }
+      .main-content { margin-top: 60px; padding: 20px; }
     }
   </style>
 </head>
@@ -661,6 +437,17 @@
       <li><a href="#"><i class="fas fa-pills"></i> Medicine Request</a></li>
     </ul>
 
+
+
+    <!-- Cart Section -->
+    <div class="cart-section">
+      <div class="cart-badge">
+        <i class="fas fa-shopping-bag"></i> 0 Items
+      </div>
+      <div class="cart-total">
+        ৳ 0
+      </div>
+    </div>
     <!-- My Offer Section -->
     <div style="padding: 20px 0;">
       <div style="padding: 0 20px;">
@@ -676,15 +463,7 @@
       </ul>
     </div>
 
-    <!-- Cart Section -->
-    <div class="cart-section">
-      <div class="cart-badge">
-        <i class="fas fa-shopping-bag"></i> 0 Items
-      </div>
-      <div class="cart-total">
-        ৳ 0
-      </div>
-    </div>
+    
 
     <!-- Sidebar Footer -->
     <div class="sidebar-footer">
@@ -807,6 +586,209 @@
       sidebar.classList.remove('active');
       sidebarOverlay.classList.remove('active');
     });
+
+    // Floating cart state management
+    (function() {
+      const STORAGE_KEY = 'floatingCartState';
+      const defaultState = { items: [] };
+      let headerBadgeEl;
+      let sidebarBadgeEl;
+      let sidebarTotalEl;
+
+      const normaliseNumber = (value) => {
+        if (typeof value === 'number') {
+          return Number.isFinite(value) ? value : 0;
+        }
+        if (typeof value === 'string') {
+          const parsed = parseFloat(value.replace(/[^0-9.-]+/g, ''));
+          return Number.isFinite(parsed) ? parsed : 0;
+        }
+        return 0;
+      };
+
+      window.toFloatingCartNumber = normaliseNumber;
+
+      const loadState = () => {
+        try {
+          const raw = window.localStorage.getItem(STORAGE_KEY);
+          if (!raw) {
+            return { ...defaultState };
+          }
+
+          const parsed = JSON.parse(raw);
+          if (!parsed || !Array.isArray(parsed.items)) {
+            return { ...defaultState };
+          }
+
+          const deduped = [];
+          parsed.items.forEach((item) => {
+            const id = item && item.id !== undefined ? String(item.id) : '';
+            const tableType = item && item.tableType ? String(item.tableType) : '';
+            const price = normaliseNumber(item && item.price);
+            const quantity = Math.max(1, Math.round(normaliseNumber(item && item.quantity !== undefined ? item.quantity : 1)));
+
+            if (!id || !tableType || price <= 0) {
+              return;
+            }
+
+            const key = item && item.key ? String(item.key) : `${tableType}_${id}`;
+            const existing = deduped.find((candidate) => candidate.key === key);
+
+            if (existing) {
+              existing.quantity += quantity;
+            } else {
+              deduped.push({
+                key,
+                id,
+                tableType,
+                price,
+                quantity,
+                name: item && item.name ? String(item.name) : undefined,
+              });
+            }
+          });
+
+          return { items: deduped };
+        } catch (error) {
+          console.warn('Floating cart load failed, resetting state.', error);
+          window.localStorage.removeItem(STORAGE_KEY);
+          return { ...defaultState };
+        }
+      };
+
+      const saveState = (state) => {
+        const payload = {
+          items: Array.isArray(state.items)
+            ? state.items.map((item) => ({
+                key: item.key,
+                id: item.id,
+                tableType: item.tableType,
+                price: item.price,
+                quantity: item.quantity,
+                name: item.name,
+              }))
+            : [],
+        };
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      };
+
+      const computeTotals = (state) => state.items.reduce(
+        (totals, item) => {
+          totals.count += item.quantity;
+          totals.amount += item.quantity * item.price;
+          return totals;
+        },
+        { count: 0, amount: 0 }
+      );
+
+      const cacheElements = () => {
+        headerBadgeEl = document.querySelector('.header-icon .badge-count');
+        sidebarBadgeEl = document.querySelector('.cart-badge');
+        sidebarTotalEl = document.querySelector('.cart-total');
+      };
+
+      const updateUi = () => {
+        if (!window.cartData) {
+          window.cartData = { ...defaultState };
+        }
+        if (!Array.isArray(window.cartData.items)) {
+          window.cartData.items = [];
+        }
+
+        const totals = computeTotals(window.cartData);
+        window.cartData.totalCount = totals.count;
+        window.cartData.totalPrice = totals.amount;
+        window.cartData.lastUpdated = Date.now();
+
+        const itemLabel = totals.count === 1 ? 'Item' : 'Items';
+        const amountText = totals.amount.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+
+        if (headerBadgeEl) {
+          headerBadgeEl.textContent = totals.count;
+        }
+        if (sidebarBadgeEl) {
+          sidebarBadgeEl.innerHTML = `<i class="fas fa-shopping-bag"></i> ${totals.count} ${itemLabel}`;
+        }
+        if (sidebarTotalEl) {
+          sidebarTotalEl.textContent = `৳ ${amountText}`;
+        }
+
+        window.dispatchEvent(new CustomEvent('floating-cart-updated', {
+          detail: {
+            totalCount: totals.count,
+            totalPrice: totals.amount,
+            items: window.cartData.items.slice(),
+          },
+        }));
+      };
+
+      const syncFromStorage = () => {
+        window.cartData = loadState();
+        updateUi();
+      };
+
+      window.addToFloatingCart = (id, name, price, tableType) => {
+        const normalisedPrice = normaliseNumber(price);
+        const normalisedId = id !== undefined ? String(id) : '';
+        const normalisedType = tableType ? String(tableType) : '';
+
+        if (!normalisedId || !normalisedType || normalisedPrice <= 0) {
+          console.warn('Floating cart: invalid item payload skipped.', { id, price, tableType });
+          return;
+        }
+
+        if (!window.cartData || !Array.isArray(window.cartData.items)) {
+          window.cartData = { ...defaultState, items: [] };
+        }
+
+        const key = `${normalisedType}_${normalisedId}`;
+        const existingIndex = window.cartData.items.findIndex((item) => item.key === key);
+
+        if (existingIndex >= 0) {
+          window.cartData.items[existingIndex].quantity += 1;
+        } else {
+          window.cartData.items.push({
+            key,
+            id: normalisedId,
+            tableType: normalisedType,
+            price: normalisedPrice,
+            quantity: 1,
+            name: name ? String(name) : undefined,
+          });
+        }
+
+        saveState(window.cartData);
+        updateUi();
+      };
+
+      const initialiseCartUi = () => {
+        cacheElements();
+        syncFromStorage();
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initialiseCartUi);
+      } else {
+        initialiseCartUi();
+      }
+
+      const resyncEvents = ['pageshow', 'focus', 'visibilitychange'];
+      resyncEvents.forEach((eventName) => {
+        window.addEventListener(eventName, syncFromStorage);
+      });
+
+      window.addEventListener('storage', (event) => {
+        if (event.key === STORAGE_KEY) {
+          syncFromStorage();
+        }
+      });
+
+      // Provide initial state for scripts that run before DOM ready.
+      window.cartData = loadState();
+    })();
   </script>
 
   @stack('scripts')

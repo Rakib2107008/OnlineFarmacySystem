@@ -31,8 +31,8 @@ Route::get('/medicines', function () {
 })->name('medicines');
 
 Route::get('/personalCare', function () {
-    $products = Medicines::where('category', 'Personal Care')->paginate(12);
-    return view('personalCare', compact('products'));
+    $medicines=Medicines::where('category', 'Personal Care')->paginate(12);
+    return view('personalCare', compact('medicines'));
 })->name('personalCare');
 
 Route::get('/diabeticCare', function () {

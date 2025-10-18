@@ -67,6 +67,7 @@ class AdminProductController extends Controller
             'discount_percentage' => $request->discount_percentage,
             'description' => $request->description,
             'category' => $request->category,
+             'quantity' => 'required|integer|min:0',
         ]);
 
         return redirect()->route('admin.products.index')
@@ -97,6 +98,7 @@ class AdminProductController extends Controller
             'discount_percentage' => 'required|integer|min:0|max:100',
             'description' => 'required|string',
             'category' => 'required|string|max:255',
+             'quantity' => 'required|integer|min:0',
         ]);
 
         $imagePath = $product->image;
@@ -133,6 +135,7 @@ class AdminProductController extends Controller
             'discount_percentage' => $request->discount_percentage,
             'description' => $request->description,
             'category' => $request->category,
+            'quantity' => $request->quantity,
         ]);
 
         return redirect()->route('admin.products.index')
