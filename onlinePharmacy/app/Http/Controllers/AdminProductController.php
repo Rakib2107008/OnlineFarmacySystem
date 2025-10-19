@@ -160,3 +160,4 @@ class AdminProductController extends Controller
             ->with('success', 'Product deleted successfully!');
     }
 }
+

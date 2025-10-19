@@ -7,6 +7,8 @@ use App\Models\Products;
 use App\Models\Medicines;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,14 @@ Route::get('/', function () {
     $products = Products::all();
     return view('welcome', compact('products'));
 })->name('home');
+
+// Cart Route
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+
+// Checkout Routes
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout/process', [CheckoutController::class, 'processOrder'])->name('checkout.process');
+Route::post('/checkout/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('checkout.applyCoupon');
 
 Route::get('/medicines', function () {
     $medicines = Medicines::where('category', 'Medicines')->paginate(12);

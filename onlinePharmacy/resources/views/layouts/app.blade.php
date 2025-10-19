@@ -390,10 +390,10 @@
             <option value="mymensingh">Mymensingh</option>
           </select>
         </div>
-        <div class="header-icon">
+        <a href="{{ route('cart') }}" class="header-icon" style="text-decoration: none;">
           <i class="fas fa-shopping-cart"></i>
           <span class="badge-count">0</span>
-        </div>
+        </a>
         <div class="header-icon">
           <i class="fas fa-user-circle"></i>
         </div>
@@ -440,14 +440,16 @@
 
 
     <!-- Cart Section -->
-    <div class="cart-section">
-      <div class="cart-badge">
-        <i class="fas fa-shopping-bag"></i> 0 Items
+    <a href="{{ route('cart') }}" style="text-decoration: none; color: inherit;">
+      <div class="cart-section">
+        <div class="cart-badge">
+          <i class="fas fa-shopping-bag"></i> 0 Items
+        </div>
+        <div class="cart-total">
+          ৳ 0
+        </div>
       </div>
-      <div class="cart-total">
-        ৳ 0
-      </div>
-    </div>
+    </a>
     <!-- My Offer Section -->
     <div style="padding: 20px 0;">
       <div style="padding: 0 20px;">
