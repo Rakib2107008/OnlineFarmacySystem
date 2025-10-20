@@ -520,7 +520,7 @@
       const itemTotal = item.price * item.quantity;
       totalCount += item.quantity;
       subtotal += itemTotal;
-      
+
       itemsHTML += `
         <div class="cart-item">
           <img src="${item.image || '/Images/placeholder.png'}" alt="${item.name || 'Product'}" class="item-image" onerror="this.src='/Images/placeholder.png'">

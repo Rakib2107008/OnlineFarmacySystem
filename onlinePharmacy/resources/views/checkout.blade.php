@@ -490,7 +490,10 @@
         <!-- Delivery Information -->
         <div class="checkout-card">
           <h3 class="card-title">Delivery Information</h3>
-          <form id="checkoutForm">
+          <form id="checkoutForm" method="POST" action="{{ route('checkout.process') }}">
+            @csrf
+            <input type="hidden" name="cart_items" id="cartItemsField">
+            <input type="hidden" name="cart_totals" id="cartTotalsField">
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label">Receiver Name <span class="optional">(Optional)</span></label>
@@ -517,13 +520,12 @@
                   <option value="mymensingh">Mymensingh</option>
                 </select>
               </div>
-              <!-- <div class="form-group">
+              <div class="form-group">
                 <label class="form-label">City <span class="required">(Required)</span></label>
-                <select class="form-select" name="city" required>
-                  <option value="">Select City</option>
-                </select>
+                <input type="text" class="form-input" name="city" required placeholder="Enter city or town">
               </div>
-            </div> -->
+
+            </div>
 
             <div class="form-row">
               <div class="form-group full-width">
@@ -540,14 +542,6 @@
                 <textarea class="form-textarea" name="address" required placeholder="Enter your delivery address"></textarea>
               </div>
             </div>
-
-            <!-- <div class="form-row">
-              <div class="form-group full-width">
-                <button type="button" class="prescription-btn">
-                  Select Prescription (optional)
-                </button>
-              </div> -->
-            </div>
           </form>
         </div>
 
@@ -556,7 +550,7 @@
           <h3 class="card-title">Payment Method</h3>
           
           <div class="payment-option">
-            <input type="radio" name="payment_method" id="cod" value="cash_on_delivery" checked>
+            <input type="radio" name="payment_method" id="cod" value="cash_on_delivery" checked form="checkoutForm" required>
             <label for="cod">Cash On Delivery</label>
           </div>
 
@@ -586,7 +580,7 @@
           <span class="value" id="summaryTotalAmount">255.00 TK</span>
         </div>
 
-        <button type="submit" class="place-order-btn" onclick="placeOrder(event)">
+        <button type="submit" class="place-order-btn" form="checkoutForm">
           <i class="fas fa-check-circle"></i> Place Order
         </button>
       </div>
@@ -596,6 +590,11 @@
 
 <script>
   const STORAGE_KEY = 'floatingCartState';
+  let checkoutTotals = {
+    subtotal: 0,
+    deliveryCharge: 0,
+    total: 0,
+  };
 
   function loadCartData() {
     try {
@@ -715,6 +714,12 @@
     // Update totals
     const deliveryCharge = 0; // Will be calculated based on location
     const total = subtotal + deliveryCharge;
+
+    checkoutTotals = {
+      subtotal,
+      deliveryCharge,
+      total,
+    };
     
     document.getElementById('tableTotal').textContent = `৳ ${subtotal.toFixed(2)}`;
     document.getElementById('summaryAmount').textContent = `${subtotal.toFixed(2)} TK`;
@@ -736,52 +741,73 @@
 
   function placeOrder(event) {
     event.preventDefault();
-    
-    const form = document.getElementById('checkoutForm');
-    
+
+    const form = event.target;
+
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
-    
+
     const cartData = loadCartData();
-    
+
     if (!cartData.items || cartData.items.length === 0) {
       alert('Your cart is empty!');
       window.location.href = "{{ route('cart') }}";
       return;
     }
-    
-    // Get form data
-    const formData = new FormData(form);
-    const orderData = {
-      items: cartData.items,
-      receiver_name: formData.get('receiver_name'),
-      receiver_phone: formData.get('receiver_phone'),
-      region: formData.get('region'),
-      city: formData.get('city'),
-      area: formData.get('area'),
-      address: formData.get('address'),
-      payment_method: document.querySelector('input[name="payment_method"]:checked').value,
-      coupon_code: document.getElementById('couponInput').value
-    };
-    
-    console.log('Order Data:', orderData);
-    
-    // TODO: Submit order to server
-    alert('Order placed successfully! (Backend integration pending)');
-    
-    // Clear cart
-    localStorage.removeItem(STORAGE_KEY);
-    window.dispatchEvent(new Event('storage'));
-    
-    // Redirect to home
-    window.location.href = "{{ route('home') }}";
+
+    const insufficientItem = cartData.items.find((item) => {
+      if (item.availableStock === undefined || item.availableStock === null) {
+        return false;
+      }
+      return item.quantity > item.availableStock;
+    });
+
+    if (insufficientItem) {
+      const label = insufficientItem.name || 'This product';
+      alert(`${label} does not have enough stock to fulfill the requested quantity.`);
+      return;
+    }
+
+    const normalisedItems = cartData.items.map((item) => {
+      const tableHint = item.tableType ?? item.table ?? item.table_name ?? item.tableName;
+      const keyHint = item.key ? String(item.key).split('_')[0] : '';
+      const resolved = String(tableHint || keyHint || '').toLowerCase();
+      const table = resolved.includes('medicine')
+        ? 'medicines'
+        : (resolved.includes('product') ? 'products' : 'products');
+
+      return {
+        key: item.key,
+        id: item.id,
+        table,
+        quantity: item.quantity,
+        price: item.price,
+      };
+    });
+
+    const cartItemsField = document.getElementById('cartItemsField');
+    if (cartItemsField) {
+      cartItemsField.value = JSON.stringify(normalisedItems);
+    }
+
+    const cartTotalsField = document.getElementById('cartTotalsField');
+    if (cartTotalsField) {
+      cartTotalsField.value = JSON.stringify(checkoutTotals);
+    }
+
+    form.submit();
   }
 
   // Initialize checkout on page load
   document.addEventListener('DOMContentLoaded', function() {
     renderCheckout();
+
+    const checkoutForm = document.getElementById('checkoutForm');
+    if (checkoutForm) {
+      checkoutForm.addEventListener('submit', placeOrder);
+    }
   });
 
   // Listen for cart updates

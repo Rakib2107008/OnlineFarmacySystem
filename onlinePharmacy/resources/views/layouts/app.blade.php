@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Pharmacy Carousel</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
@@ -40,6 +41,7 @@
       border-bottom: 1px solid #e0e0e0;
     }
 
+        
     .user-info {
       display: flex;
       align-items: center;
@@ -120,6 +122,12 @@
       font-size: 18px;
       color: #0066cc;
       width: 20px;
+    }
+
+    .cart-section-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
 
     .cart-section {
@@ -390,7 +398,7 @@
             <option value="mymensingh">Mymensingh</option>
           </select>
         </div>
-        <a href="{{ route('cart') }}" class="header-icon" style="text-decoration: none;">
+        <a href="{{ route('cart') }}" class="header-icon" style="text-decoration: none; color: inherit;">
           <i class="fas fa-shopping-cart"></i>
           <span class="badge-count">0</span>
         </a>
@@ -437,19 +445,6 @@
       <li><a href="#"><i class="fas fa-pills"></i> Medicine Request</a></li>
     </ul>
 
-
-
-    <!-- Cart Section -->
-    <a href="{{ route('cart') }}" style="text-decoration: none; color: inherit;">
-      <div class="cart-section">
-        <div class="cart-badge">
-          <i class="fas fa-shopping-bag"></i> 0 Items
-        </div>
-        <div class="cart-total">
-          ৳ 0
-        </div>
-      </div>
-    </a>
     <!-- My Offer Section -->
     <div style="padding: 20px 0;">
       <div style="padding: 0 20px;">
@@ -465,7 +460,17 @@
       </ul>
     </div>
 
-    
+    <!-- Cart Section -->
+    <a href="{{ route('cart') }}" class="cart-section-link" aria-label="View cart">
+      <div class="cart-section">
+        <div class="cart-badge">
+          <i class="fas fa-shopping-bag"></i> 0 Items
+        </div>
+        <div class="cart-total">
+          ৳ 0
+        </div>
+      </div>
+    </a>
 
     <!-- Sidebar Footer -->
     <div class="sidebar-footer">
@@ -592,7 +597,11 @@
     // Floating cart state management
     (function() {
       const STORAGE_KEY = 'floatingCartState';
+      const BASE_ASSET_URL = "{{ rtrim(asset(''), '/') }}/";
+      const CART_ITEM_ENDPOINT = "{{ route('cart.item') }}";
+      const PLACEHOLDER_IMAGE = BASE_ASSET_URL + 'Images/placeholder.png';
       const defaultState = { items: [] };
+      const detailCache = new Map();
       let headerBadgeEl;
       let sidebarBadgeEl;
       let sidebarTotalEl;
@@ -610,6 +619,157 @@
 
       window.toFloatingCartNumber = normaliseNumber;
 
+      const normaliseTableType = (value) => {
+        const text = String(value || '').toLowerCase();
+        if (!text) {
+          return '';
+        }
+        if (text.includes('product')) {
+          return 'products';
+        }
+        if (text.includes('medicine')) {
+          return 'medicines';
+        }
+        return text;
+      };
+
+      const normaliseImageInput = (input) => {
+        if (input === null || input === undefined) {
+          return null;
+        }
+        let value = String(input).trim();
+        if (!value) {
+          return null;
+        }
+
+        if (/^(?:https?:)?\/\//i.test(value) || value.startsWith('data:')) {
+          return { type: 'external', value };
+        }
+
+        value = value.replace(/\\/g, '/');
+        value = value.replace(/^public\//i, '');
+        value = value.replace(/^storage\//i, '');
+        value = value.replace(/^images?\//i, '');
+        value = value.replace(/^Images\//, '');
+        value = value.replace(/^\/+/g, '');
+
+        if (!value) {
+          return null;
+        }
+
+        return { type: 'local', value };
+      };
+
+      const resolveImagePathInternal = (input) => {
+        const result = normaliseImageInput(input);
+        if (!result) {
+          return null;
+        }
+
+        if (result.type === 'external') {
+          return result.value;
+        }
+
+        return 'Images/' + result.value;
+      };
+
+      const resolveImageUrlInternal = (input) => {
+        const result = normaliseImageInput(input);
+        if (!result) {
+          return PLACEHOLDER_IMAGE;
+        }
+
+        if (result.type === 'external') {
+          return result.value;
+        }
+
+        return BASE_ASSET_URL + 'Images/' + result.value;
+      };
+
+      window.resolveImagePath = (input) => resolveImagePathInternal(input);
+      window.resolveImageUrl = (input) => resolveImageUrlInternal(input);
+
+      const getCsrfToken = () => {
+        return document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+      };
+
+      const fetchCartItemDetails = async (tableType, id) => {
+        const cacheKey = `${tableType}_${id}`;
+        if (detailCache.has(cacheKey)) {
+          const cached = detailCache.get(cacheKey);
+          if (cached instanceof Promise) {
+            return cached;
+          }
+          return cached;
+        }
+
+        const payload = {
+          tableType,
+          id,
+        };
+
+        const csrfToken = getCsrfToken();
+
+        const request = fetch(CART_ITEM_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {}),
+          },
+          body: JSON.stringify(payload),
+        })
+          .then(async (response) => {
+            if (!response.ok) {
+              throw new Error(`Unable to load item ${tableType}#${id}`);
+            }
+            const data = await response.json();
+            detailCache.set(cacheKey, data);
+            return data;
+          })
+          .catch((error) => {
+            detailCache.delete(cacheKey);
+            throw error;
+          });
+
+        detailCache.set(cacheKey, request);
+        return request;
+      };
+
+      window.fetchCartItemDetails = fetchCartItemDetails;
+
+      const cloneItem = (item) => {
+        const id = item && item.id !== undefined ? String(item.id) : '';
+        const tableHint = item && (item.tableType ?? item.table ?? item.table_name ?? item.tableName);
+        const keyHint = item && item.key ? String(item.key).split('_')[0] : '';
+  const inferred = tableHint ?? keyHint ?? (id.startsWith('medicines') ? 'medicines' : (id.startsWith('products') ? 'products' : ''));
+  const tableType = normaliseTableType(inferred || 'products');
+        const price = normaliseNumber(item && item.price);
+        const quantity = Math.max(1, Math.round(normaliseNumber(item && item.quantity !== undefined ? item.quantity : 1)));
+
+        if (!id || !tableType || price <= 0) {
+          return null;
+        }
+
+        const imagePath = resolveImagePathInternal(item && (item.image || item.imagePath || item.image_path || item.imageUrl));
+        const imageUrl = imagePath ? resolveImageUrlInternal(imagePath) : resolveImageUrlInternal(item && item.image_url);
+        const availableStockRaw = item && (item.availableStock ?? item.stock ?? item.quantityAvailable);
+        const availableStock = availableStockRaw !== undefined && availableStockRaw !== null
+          ? Math.max(0, Math.floor(normaliseNumber(availableStockRaw)))
+          : undefined;
+
+        return {
+          key: item && item.key ? String(item.key) : `${tableType}_${id}`,
+          id,
+          tableType,
+          price,
+          quantity,
+          name: item && item.name ? String(item.name) : undefined,
+          image: imagePath,
+          imageUrl,
+          availableStock,
+        };
+      };
+
       const loadState = () => {
         try {
           const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -624,29 +784,23 @@
 
           const deduped = [];
           parsed.items.forEach((item) => {
-            const id = item && item.id !== undefined ? String(item.id) : '';
-            const tableType = item && item.tableType ? String(item.tableType) : '';
-            const price = normaliseNumber(item && item.price);
-            const quantity = Math.max(1, Math.round(normaliseNumber(item && item.quantity !== undefined ? item.quantity : 1)));
-
-            if (!id || !tableType || price <= 0) {
+            const candidate = cloneItem(item);
+            if (!candidate) {
               return;
             }
 
-            const key = item && item.key ? String(item.key) : `${tableType}_${id}`;
-            const existing = deduped.find((candidate) => candidate.key === key);
-
+            const existing = deduped.find((entry) => entry.key === candidate.key);
             if (existing) {
-              existing.quantity += quantity;
+              existing.quantity += candidate.quantity;
+              if ((!existing.image || !existing.imageUrl) && candidate.image) {
+                existing.image = candidate.image;
+                existing.imageUrl = candidate.imageUrl;
+              }
+              if (existing.availableStock === undefined && candidate.availableStock !== undefined) {
+                existing.availableStock = candidate.availableStock;
+              }
             } else {
-              deduped.push({
-                key,
-                id,
-                tableType,
-                price,
-                quantity,
-                name: item && item.name ? String(item.name) : undefined,
-              });
+              deduped.push(candidate);
             }
           });
 
@@ -668,6 +822,9 @@
                 price: item.price,
                 quantity: item.quantity,
                 name: item.name,
+                image: item.image,
+                imageUrl: item.imageUrl,
+                availableStock: item.availableStock,
               }))
             : [],
         };
@@ -732,38 +889,97 @@
         updateUi();
       };
 
-      window.addToFloatingCart = (id, name, price, tableType) => {
-        const normalisedPrice = normaliseNumber(price);
+      window.addToFloatingCart = async (id, name, price, tableType) => {
         const normalisedId = id !== undefined ? String(id) : '';
-        const normalisedType = tableType ? String(tableType) : '';
+        const requestedType = normaliseTableType(tableType);
+        const fallbackPrice = normaliseNumber(price);
 
-        if (!normalisedId || !normalisedType || normalisedPrice <= 0) {
+        if (!normalisedId || !requestedType || fallbackPrice <= 0) {
           console.warn('Floating cart: invalid item payload skipped.', { id, price, tableType });
-          return;
+          return false;
         }
 
         if (!window.cartData || !Array.isArray(window.cartData.items)) {
           window.cartData = { ...defaultState, items: [] };
         }
 
-        const key = `${normalisedType}_${normalisedId}`;
-        const existingIndex = window.cartData.items.findIndex((item) => item.key === key);
+        const key = `${requestedType}_${normalisedId}`;
+        let existing = window.cartData.items.find((item) => item.key === key);
 
-        if (existingIndex >= 0) {
-          window.cartData.items[existingIndex].quantity += 1;
-        } else {
-          window.cartData.items.push({
-            key,
-            id: normalisedId,
-            tableType: normalisedType,
-            price: normalisedPrice,
-            quantity: 1,
-            name: name ? String(name) : undefined,
-          });
+        const ensureDetails = async () => {
+          if (existing && existing.availableStock !== undefined && existing.image && existing.price > 0) {
+            return existing;
+          }
+
+          try {
+            const details = await fetchCartItemDetails(requestedType, normalisedId);
+            const dbPrice = normaliseNumber(details.current_price ?? details.price ?? fallbackPrice);
+            const availableStock = details.stock !== undefined && details.stock !== null
+              ? Math.max(0, Math.floor(normaliseNumber(details.stock)))
+              : undefined;
+            const imagePath = resolveImagePathInternal(details.image_path ?? details.image ?? details.image_url);
+            const imageUrl = imagePath ? resolveImageUrlInternal(imagePath) : resolveImageUrlInternal(details.image_url);
+            const resolvedName = details.name || name;
+
+            if (!existing) {
+              existing = {
+                key,
+                id: normalisedId,
+                tableType: requestedType,
+                price: dbPrice || fallbackPrice,
+                quantity: 0,
+                name: resolvedName ? String(resolvedName) : undefined,
+                image: imagePath,
+                imageUrl,
+                availableStock,
+              };
+              window.cartData.items.push(existing);
+            } else {
+              existing.price = dbPrice || existing.price || fallbackPrice;
+              existing.name = resolvedName ? String(resolvedName) : existing.name;
+              if (!existing.image && imagePath) {
+                existing.image = imagePath;
+              }
+              if (!existing.imageUrl && imageUrl) {
+                existing.imageUrl = imageUrl;
+              }
+              if (availableStock !== undefined) {
+                existing.availableStock = availableStock;
+              }
+            }
+          } catch (error) {
+            console.error('Floating cart: failed to load item details.', error);
+            alert('Unable to add this product right now. Please try again later.');
+            return null;
+          }
+
+          return existing;
+        };
+
+        const hydratedItem = await ensureDetails();
+        if (!hydratedItem) {
+          // remove placeholder if we created one without data
+          window.cartData.items = window.cartData.items.filter((item) => item.key !== key || item === existing);
+          return false;
         }
+
+        const availableStock = hydratedItem.availableStock;
+        const alreadySelected = hydratedItem.quantity || 0;
+
+        if (availableStock !== undefined && availableStock - (alreadySelected + 1) < 0) {
+          alert('This product is out of stock.');
+          return false;
+        }
+
+        hydratedItem.quantity = alreadySelected + 1;
+        hydratedItem.price = hydratedItem.price || fallbackPrice;
+        hydratedItem.tableType = requestedType;
+        hydratedItem.imageUrl = hydratedItem.imageUrl || resolveImageUrlInternal(hydratedItem.image);
+        hydratedItem.image = hydratedItem.image || resolveImagePathInternal(hydratedItem.imageUrl);
 
         saveState(window.cartData);
         updateUi();
+        return true;
       };
 
       const initialiseCartUi = () => {
@@ -792,6 +1008,19 @@
       window.cartData = loadState();
     })();
   </script>
+
+  @if(session('clear_cart'))
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        try {
+          localStorage.removeItem('floatingCartState');
+          window.dispatchEvent(new Event('storage'));
+        } catch (error) {
+          console.warn('Unable to reset cart state after checkout.', error);
+        }
+      });
+    </script>
+  @endif
 
   @stack('scripts')
 </body>

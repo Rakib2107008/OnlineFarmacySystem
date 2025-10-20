@@ -211,15 +211,23 @@
     // Try immediately; if not ready, retry on next tick once.
     const performAdd = () => {
       if (typeof window.addToFloatingCart === 'function') {
-        window.addToFloatingCart(productId, productName, unitPrice, 'medicine_T');
-        button.innerHTML = '<i class="fas fa-check"></i><span>Added</span>';
-        button.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
-        button.style.pointerEvents = 'none';
-        setTimeout(() => {
-          button.innerHTML = '<i class="fas fa-shopping-cart"></i><span>Add to Cart</span>';
-          button.style.background = 'linear-gradient(135deg, #0066cc 0%, #0052a3 100%)';
-          button.style.pointerEvents = 'auto';
-        }, 1800);
+        Promise.resolve(window.addToFloatingCart(productId, productName, unitPrice, 'medicines'))
+          .then((added) => {
+            if (!added) {
+              return;
+            }
+            button.innerHTML = '<i class="fas fa-check"></i><span>Added</span>';
+            button.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
+            button.style.pointerEvents = 'none';
+            setTimeout(() => {
+              button.innerHTML = '<i class="fas fa-shopping-cart"></i><span>Add to Cart</span>';
+              button.style.background = 'linear-gradient(135deg, #0066cc 0%, #0052a3 100%)';
+              button.style.pointerEvents = 'auto';
+            }, 1800);
+          })
+          .catch((error) => {
+            console.warn('Unable to add product to cart', error);
+          });
       } else {
         setTimeout(performAdd, 0);
       }

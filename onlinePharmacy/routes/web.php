@@ -9,7 +9,7 @@ use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
-
+use App\Http\Controllers\SslCommerzTestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +29,7 @@ Route::get('/', function () {
 
 // Cart Route
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart/item', [CartController::class, 'getItem'])->name('cart.item');
 
 // Checkout Routes
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
@@ -78,6 +79,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     ]);
     
 });
+
+
+Route::post('/sslcommerz/initiate', [SslCommerzTestController::class, 'callApi'])->name('paymentGateway');
+Route::match(['GET', 'POST'], '/sslcommerz/success', [CheckoutController::class, 'paymentSuccess'])->name('checkout.payment.success');
+Route::match(['GET', 'POST'], '/sslcommerz/fail', [CheckoutController::class, 'paymentFail'])->name('checkout.payment.fail');
+Route::match(['GET', 'POST'], '/sslcommerz/cancel', [CheckoutController::class, 'paymentCancel'])->name('checkout.payment.cancel');
 
 // Redirect /admin/medicines (plural) to /admin/medicine (singular) for convenience
 Route::redirect('/admin/medicines', '/admin/medicine', 301);

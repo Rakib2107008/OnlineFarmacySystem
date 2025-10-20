@@ -83,7 +83,7 @@
   .btn-add-cart{ width:100%; padding:12px; background:#0066cc; color:white; border:none; border-radius:6px; font-weight:600; cursor:pointer; transition:.3s; }
   .btn-add-cart:hover{ background:#0052a3; }
 
-  .offer-section{ padding:60px 0; background-color: #87CEEB ; border-radius:16px; }
+  .offer-section{ padding:60px 0; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); }
   .offer-card{ background:white; border-radius:16px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,0.15); transition:.3s; }
   .offer-card:hover{ transform:translateY(-8px); }
   .offer-img{ width:100%; height:250px; object-fit:cover; }
@@ -367,20 +367,28 @@ document.addEventListener('click', (event) => {
   }
 
   if (typeof window.addToFloatingCart === 'function') {
-    window.addToFloatingCart(idSource, productName, unitPrice, 'product_T');
+    Promise.resolve(window.addToFloatingCart(idSource, productName, unitPrice, 'products'))
+      .then((added) => {
+        if (!added) {
+          return;
+        }
+
+        button.innerHTML = '<i class="fas fa-check"></i> Added';
+        button.style.background = '#4CAF50';
+        button.style.pointerEvents = 'none';
+
+        setTimeout(() => {
+          button.innerHTML = '<i class="fas fa-shopping-cart"></i> Add to Cart';
+          button.style.background = '#0066cc';
+          button.style.pointerEvents = 'auto';
+        }, 1800);
+      })
+      .catch((error) => {
+        console.warn('Unable to add product to cart', error);
+      });
   } else {
     console.warn('Floating cart function not available on welcome page.');
   }
-
-  button.innerHTML = '<i class="fas fa-check"></i> Added';
-  button.style.background = '#4CAF50';
-  button.style.pointerEvents = 'none';
-
-  setTimeout(() => {
-    button.innerHTML = '<i class="fas fa-shopping-cart"></i> Add to Cart';
-    button.style.background = '#0066cc';
-    button.style.pointerEvents = 'auto';
-  }, 1800);
 });
 
 // Category card click

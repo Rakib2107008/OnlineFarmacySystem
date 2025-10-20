@@ -185,22 +185,31 @@ document.addEventListener('click', (event) => {
     return;
   }
 
-  if (typeof window.addToFloatingCart === 'function') {
-    window.addToFloatingCart(productId, productName, unitPrice, 'medicine_T');
-  } else {
-    console.warn('Floating cart function not available on personal care page.');
-    return;
-  }
+  const add = () => {
+    if (typeof window.addToFloatingCart === 'function') {
+      Promise.resolve(window.addToFloatingCart(productId, productName, unitPrice, 'medicines'))
+        .then((added) => {
+          if (!added) {
+            return;
+          }
+          button.innerHTML = '<i class="fas fa-check"></i><span>Added</span>';
+          button.style.background = 'linear-gradient(135deg,#4CAF50 0%,#45a049 100%)';
+          button.style.pointerEvents = 'none';
+          setTimeout(() => {
+            button.innerHTML = '<i class="fas fa-shopping-cart"></i><span>Add to Cart</span>';
+            button.style.background = 'linear-gradient(135deg,#0066cc 0%,#0052a3 100%)';
+            button.style.pointerEvents = 'auto';
+          }, 1800);
+        })
+        .catch((error) => {
+          console.warn('Unable to add product to cart', error);
+        });
+    } else {
+      setTimeout(add, 0);
+    }
+  };
 
-  button.innerHTML = '<i class="fas fa-check"></i><span>Added</span>';
-  button.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
-  button.style.pointerEvents = 'none';
-
-  setTimeout(() => {
-    button.innerHTML = '<i class="fas fa-shopping-cart"></i><span>Add to Cart</span>';
-    button.style.background = 'linear-gradient(135deg, #0066cc 0%, #0052a3 100%)';
-    button.style.pointerEvents = 'auto';
-  }, 1800);
+  add();
 });
 
 // Optional carousel re-init (will no-op if not present)
