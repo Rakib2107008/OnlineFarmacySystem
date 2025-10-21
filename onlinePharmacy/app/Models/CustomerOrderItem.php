@@ -11,14 +11,48 @@ class CustomerOrderItem extends Model
 
     protected $fillable = [
         'customer_order_id',
-        'item_id',
-        'item_type',
+        'product_id',
+        'medicine_id',
         'quantity',
         'price',
+        'total',
     ];
 
+    /**
+     * Get the order that owns the item
+     */
     public function order()
     {
-        return $this->belongsTo(CustomerOrder::class);
+        return $this->belongsTo(CustomerOrder::class, 'customer_order_id');
+    }
+
+    /**
+     * Get the product (if applicable)
+     */
+    public function product()
+    {
+        return $this->belongsTo(Products::class, 'product_id');
+    }
+
+    /**
+     * Get the medicine (if applicable)
+     */
+    public function medicine()
+    {
+        return $this->belongsTo(Medicines::class, 'medicine_id');
+    }
+
+    /**
+     * Get the item name (product or medicine)
+     */
+    public function getItemNameAttribute()
+    {
+        if ($this->product) {
+            return $this->product->name;
+        }
+        if ($this->medicine) {
+            return $this->medicine->name;
+        }
+        return 'Unknown Item';
     }
 }

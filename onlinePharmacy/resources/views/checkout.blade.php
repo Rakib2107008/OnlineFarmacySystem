@@ -300,24 +300,40 @@
     border-radius: 8px;
     cursor: pointer;
     transition: .3s;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 
   .payment-option:hover {
     border-color: #0066cc;
     background: #f8f9fa;
   }
+  
+  .payment-option input[type="radio"]:checked + label {
+    color: #0066cc;
+    font-weight: 600;
+  }
 
   .payment-option input[type="radio"] {
     width: 20px;
     height: 20px;
     cursor: pointer;
+    accent-color: #0066cc;
   }
 
   .payment-option label {
     font-size: 15px;
     font-weight: 500;
     color: #333;
+    cursor: pointer;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .payment-option label i {
+    font-size: 18px;
+  }
     cursor: pointer;
     flex: 1;
   }
@@ -490,10 +506,27 @@
         <!-- Delivery Information -->
         <div class="checkout-card">
           <h3 class="card-title">Delivery Information</h3>
+          
+          <!-- Display Error Messages -->
+          @if(session('error'))
+            <div style="background: #fee; color: #c00; padding: 15px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #fcc;">
+              <strong>Error:</strong> {{ session('error') }}
+            </div>
+          @endif
+          
+          @if($errors->any())
+            <div style="background: #fee; color: #c00; padding: 15px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #fcc;">
+              <strong>Validation Errors:</strong>
+              <ul style="margin: 10px 0 0 20px;">
+                @foreach($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+          
           <form id="checkoutForm" method="POST" action="{{ route('checkout.process') }}">
             @csrf
-            <input type="hidden" name="cart_items" id="cartItemsField">
-            <input type="hidden" name="cart_totals" id="cartTotalsField">
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label">Receiver Name <span class="optional">(Optional)</span></label>
@@ -520,12 +553,7 @@
                   <option value="mymensingh">Mymensingh</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label class="form-label">City <span class="required">(Required)</span></label>
-                <input type="text" class="form-input" name="city" required placeholder="Enter city or town">
-              </div>
-
-            </div>
+              
 
             <div class="form-row">
               <div class="form-group full-width">
@@ -542,22 +570,43 @@
                 <textarea class="form-textarea" name="address" required placeholder="Enter your delivery address"></textarea>
               </div>
             </div>
+
+            <!-- Payment Method -->
+            <div class="form-row">
+              <div class="form-group full-width">
+                <label class="form-label">Payment Method <span class="required">(Required)</span></label>
+                
+                <!-- Cash on Delivery Option -->
+                <div class="payment-option">
+                  <input type="radio" name="payment_method" id="cod" value="cash_on_delivery" checked required>
+                  <label for="cod">
+                    <i class="fas fa-money-bill-wave"></i> Cash On Delivery
+                  </label>
+                </div>
+                <div class="payment-note">
+                  <p><strong>*** Please pay first for outside Dhaka delivery (ঢাকার বাহিরের অর্ডারের ক্ষেত্রে ক্যাশ অন ডেলিভারি প্রযোজ্য নয়)</strong></p>
+                  <p><strong>*** Payment will be collected when delivery is made (ডেলিভারি মেন করার সময় পেমেন্ট নেওয়া হবে। পণ্য পরীক্ষা করার পরে আপনি পেমেন্ট করতে পারবেন)</strong></p>
+                </div>
+
+                <!-- Online Payment Option -->
+                <div class="payment-option" style="margin-top: 15px;">
+                  <input type="radio" name="payment_method" id="online" value="online" required>
+                  <label for="online">
+                    <i class="fas fa-credit-card"></i> Online Payment (SSLCommerz)
+                  </label>
+                </div>
+                <div class="payment-note" id="onlinePaymentNote" style="display: none;">
+                  <p><strong>*** Pay securely with bKash, Nagad, Rocket, Cards, and more</strong></p>
+                  <p><strong>*** You will be redirected to SSLCommerz payment gateway</strong></p>
+                </div>
+              </div>
+            </div>
+
+            <input type="hidden" name="cart_items" id="cartItemsInput">
+            <input type="hidden" name="coupon_code" id="couponInput">
+            
+            </div>
           </form>
-        </div>
-
-        <!-- Payment Method -->
-        <div class="checkout-card">
-          <h3 class="card-title">Payment Method</h3>
-          
-          <div class="payment-option">
-            <input type="radio" name="payment_method" id="cod" value="cash_on_delivery" checked form="checkoutForm" required>
-            <label for="cod">Cash On Delivery</label>
-          </div>
-
-          <div class="payment-note">
-            <p><strong>*** Please pay first for outside Dhaka delivery (ঢাকার বাহিরের অর্ডারের ক্ষেত্রে ক্যাশ অন ডেলিভারি প্রযোজ্য নয়)</strong></p>
-            <p><strong>*** Payment will be collected when delivery is made (ডেলিভারি মেন করার সময় পেমেন্ট নেওয়া হবে। পণ্য পরীক্ষা করার পরে আপনি পেমেন্ট করতে পারবেন)</strong></p>
-          </div>
         </div>
       </div>
 
@@ -590,11 +639,6 @@
 
 <script>
   const STORAGE_KEY = 'floatingCartState';
-  let checkoutTotals = {
-    subtotal: 0,
-    deliveryCharge: 0,
-    total: 0,
-  };
 
   function loadCartData() {
     try {
@@ -714,12 +758,6 @@
     // Update totals
     const deliveryCharge = 0; // Will be calculated based on location
     const total = subtotal + deliveryCharge;
-
-    checkoutTotals = {
-      subtotal,
-      deliveryCharge,
-      total,
-    };
     
     document.getElementById('tableTotal').textContent = `৳ ${subtotal.toFixed(2)}`;
     document.getElementById('summaryAmount').textContent = `${subtotal.toFixed(2)} TK`;
@@ -739,75 +777,54 @@
     alert('Coupon functionality will be implemented soon!');
   }
 
-  function placeOrder(event) {
-    event.preventDefault();
-
-    const form = event.target;
-
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    const cartData = loadCartData();
-
-    if (!cartData.items || cartData.items.length === 0) {
-      alert('Your cart is empty!');
-      window.location.href = "{{ route('cart') }}";
-      return;
-    }
-
-    const insufficientItem = cartData.items.find((item) => {
-      if (item.availableStock === undefined || item.availableStock === null) {
-        return false;
-      }
-      return item.quantity > item.availableStock;
-    });
-
-    if (insufficientItem) {
-      const label = insufficientItem.name || 'This product';
-      alert(`${label} does not have enough stock to fulfill the requested quantity.`);
-      return;
-    }
-
-    const normalisedItems = cartData.items.map((item) => {
-      const tableHint = item.tableType ?? item.table ?? item.table_name ?? item.tableName;
-      const keyHint = item.key ? String(item.key).split('_')[0] : '';
-      const resolved = String(tableHint || keyHint || '').toLowerCase();
-      const table = resolved.includes('medicine')
-        ? 'medicines'
-        : (resolved.includes('product') ? 'products' : 'products');
-
-      return {
-        key: item.key,
-        id: item.id,
-        table,
-        quantity: item.quantity,
-        price: item.price,
-      };
-    });
-
-    const cartItemsField = document.getElementById('cartItemsField');
-    if (cartItemsField) {
-      cartItemsField.value = JSON.stringify(normalisedItems);
-    }
-
-    const cartTotalsField = document.getElementById('cartTotalsField');
-    if (cartTotalsField) {
-      cartTotalsField.value = JSON.stringify(checkoutTotals);
-    }
-
-    form.submit();
-  }
-
   // Initialize checkout on page load
   document.addEventListener('DOMContentLoaded', function() {
     renderCheckout();
-
-    const checkoutForm = document.getElementById('checkoutForm');
-    if (checkoutForm) {
-      checkoutForm.addEventListener('submit', placeOrder);
+    
+    // Handle payment method toggle
+    const codRadio = document.getElementById('cod');
+    const onlineRadio = document.getElementById('online');
+    const onlinePaymentNote = document.getElementById('onlinePaymentNote');
+    
+    if (codRadio && onlineRadio) {
+      codRadio.addEventListener('change', function() {
+        if (this.checked) {
+          onlinePaymentNote.style.display = 'none';
+        }
+      });
+      
+      onlineRadio.addEventListener('change', function() {
+        if (this.checked) {
+          onlinePaymentNote.style.display = 'block';
+        }
+      });
     }
+    
+    // Handle form submission
+    const form = document.getElementById('checkoutForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const cartData = loadCartData();
+      
+      if (!cartData.items || cartData.items.length === 0) {
+        alert('Your cart is empty!');
+        window.location.href = "{{ route('cart') }}";
+        return;
+      }
+      
+      // Populate hidden cart_items field with JSON
+      document.getElementById('cartItemsInput').value = JSON.stringify(cartData.items);
+      
+      // Show loading state
+      const submitBtn = document.querySelector('.place-order-btn');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+      
+      // Submit the form
+      form.submit();
+    });
   });
 
   // Listen for cart updates

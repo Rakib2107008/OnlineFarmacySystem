@@ -11,7 +11,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Exclude payment callback URLs from CSRF verification
+        $middleware->validateCsrfTokens(except: [
+            '/payment/success',
+            '/payment/fail',
+            '/payment/cancel',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

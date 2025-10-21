@@ -41,7 +41,6 @@
       border-bottom: 1px solid #e0e0e0;
     }
 
-        
     .user-info {
       display: flex;
       align-items: center;
@@ -739,10 +738,8 @@
 
       const cloneItem = (item) => {
         const id = item && item.id !== undefined ? String(item.id) : '';
-        const tableHint = item && (item.tableType ?? item.table ?? item.table_name ?? item.tableName);
-        const keyHint = item && item.key ? String(item.key).split('_')[0] : '';
-  const inferred = tableHint ?? keyHint ?? (id.startsWith('medicines') ? 'medicines' : (id.startsWith('products') ? 'products' : ''));
-  const tableType = normaliseTableType(inferred || 'products');
+        const tableTypeRaw = item && item.tableType ? String(item.tableType) : '';
+        const tableType = normaliseTableType(tableTypeRaw);
         const price = normaliseNumber(item && item.price);
         const quantity = Math.max(1, Math.round(normaliseNumber(item && item.quantity !== undefined ? item.quantity : 1)));
 
@@ -1011,14 +1008,9 @@
 
   @if(session('clear_cart'))
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        try {
-          localStorage.removeItem('floatingCartState');
-          window.dispatchEvent(new Event('storage'));
-        } catch (error) {
-          console.warn('Unable to reset cart state after checkout.', error);
-        }
-      });
+      // Clear cart after successful order
+      localStorage.removeItem('floatingCartState');
+      window.dispatchEvent(new Event('storage'));
     </script>
   @endif
 

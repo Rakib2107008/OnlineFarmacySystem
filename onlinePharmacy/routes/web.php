@@ -81,10 +81,29 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 
-Route::post('/sslcommerz/initiate', [SslCommerzTestController::class, 'callApi'])->name('paymentGateway');
-Route::match(['GET', 'POST'], '/sslcommerz/success', [CheckoutController::class, 'paymentSuccess'])->name('checkout.payment.success');
-Route::match(['GET', 'POST'], '/sslcommerz/fail', [CheckoutController::class, 'paymentFail'])->name('checkout.payment.fail');
-Route::match(['GET', 'POST'], '/sslcommerz/cancel', [CheckoutController::class, 'paymentCancel'])->name('checkout.payment.cancel');
+Route::get('/sslcommerz/test', [SslCommerzTestController::class, 'callApi'])->name('paymentGateway');
+
+// Debug route to test payment gateway directly
+Route::get('/test-payment', function() {
+    return redirect()->route('paymentGateway', [
+        'total_amount' => 100,
+        'tran_id' => 'TEST-' . time(),
+        'cus_name' => 'Test Customer',
+        'cus_email' => 'test@test.com',
+        'cus_phone' => '01700000000',
+        'cus_add1' => 'Dhaka',
+        'cus_city' => 'Dhaka',
+        'cus_postcode' => '1207',
+    ]);
+});
+
+// Payment Callback Routes
+Route::post('/payment/success', [SslCommerzTestController::class, 'success'])->name('payment.success');
+Route::post('/payment/fail', [SslCommerzTestController::class, 'fail'])->name('payment.fail');
+Route::post('/payment/cancel', [SslCommerzTestController::class, 'cancel'])->name('payment.cancel');
+
+// Order Confirmation Route
+Route::get('/order/confirmation/{order_id}', [CheckoutController::class, 'orderConfirmation'])->name('order.confirmation');
 
 // Redirect /admin/medicines (plural) to /admin/medicine (singular) for convenience
 Route::redirect('/admin/medicines', '/admin/medicine', 301);

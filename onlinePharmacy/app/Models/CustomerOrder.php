@@ -10,6 +10,7 @@ class CustomerOrder extends Model
     use HasFactory;
 
     protected $fillable = [
+        'order_id',
         'receiver_name',
         'receiver_phone',
         'region',
@@ -17,16 +18,26 @@ class CustomerOrder extends Model
         'area',
         'address',
         'payment_method',
-        'cart_totals',
+        'coupon_code',
+        'total_amount',
+        'transaction_id',
         'status',
+        'payment_status',
     ];
 
-    protected $casts = [
-        'cart_totals' => 'array',
-    ];
-
+    /**
+     * Get the items for the order
+     */
     public function items()
     {
         return $this->hasMany(CustomerOrderItem::class);
+    }
+
+    /**
+     * Get the total amount formatted
+     */
+    public function getFormattedTotalAttribute()
+    {
+        return '৳ ' . number_format($this->total_amount, 2);
     }
 }
