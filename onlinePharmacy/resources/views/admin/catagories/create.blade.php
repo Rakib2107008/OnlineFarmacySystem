@@ -11,7 +11,7 @@
                 <h5 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Create New Product</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.medicine.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">
@@ -110,7 +110,7 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save me-2"></i>Save Medicine
                         </button>
-                        <a href="{{ route('admin.medicine.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('admin.categories.index') }}" class="btn btn-secondary">
                             <i class="fas fa-times me-2"></i>Cancel
                         </a>
                     </div>

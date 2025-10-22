@@ -11,7 +11,7 @@
                 <h5 class="mb-0"><i class="fas fa-edit me-2"></i>Edit Product</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.medicine.update', $medicines->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.categories.update', $medicines->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -121,7 +121,7 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save me-2"></i>Update Product
                         </button>
-                        <a href="{{ route('admin.medicine.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('admin.categories.index') }}" class="btn btn-secondary">
                             <i class="fas fa-times me-2"></i>Cancel
                         </a>
                     </div>
