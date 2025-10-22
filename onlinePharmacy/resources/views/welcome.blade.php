@@ -256,12 +256,12 @@
             <h3 class="category-name">Baby & Mom</h3>
           </div>
         </a>
-         <a href="{{ route('reproductiveWellbeing') }}" class="categoryLink">
+         <!-- <a href="{{ route('reproductiveWellbeing') }}" class="categoryLink">
           <div class="category-card">
-            <img src="{{ asset('Images/wellbeing.jpg') }}" alt="Reproductive Wellbeing" class="category-img">
+            <img src="Images/image11.jpg" alt="Reproductive Wellbeing" class="category-img">
             <h3 class="category-name">Reproductive Wellbeing</h3>
           </div>
-        </a>
+        </a> -->
       </div>
       <button class="slider-btn next-btn" onclick="scrollCategories('right')"><i class="fas fa-chevron-right"></i></button>
     </div>
@@ -508,6 +508,7 @@ const observer = new IntersectionObserver(function(entries) {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.style.opacity = '1';
+
       entry.target.style.transform = 'translateY(0)';
     }
   });
