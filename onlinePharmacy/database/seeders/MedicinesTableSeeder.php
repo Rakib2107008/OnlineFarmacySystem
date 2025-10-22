@@ -1219,7 +1219,7 @@ class MedicinesTableSeeder extends Seeder
  [
                 'name' => 'Condoms Ultra Thin',
                 'description' => 'Premium latex condoms for enhanced sensitivity (Pack of 12)',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 300.00,
                 'current_price' => 270.00,
                 'discount_percentage' => 10,
@@ -1229,7 +1229,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Personal Lubricant Water-Based',
                 'description' => 'Long-lasting intimate lubricant for enhanced comfort',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 450.00,
                 'current_price' => 405.00,
                 'discount_percentage' => 10,
@@ -1239,7 +1239,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Testosterone Booster',
                 'description' => 'Natural male vitality supplement with herbs and minerals',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 850.00,
                 'current_price' => 765.00,
                 'discount_percentage' => 10,
@@ -1249,7 +1249,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Maca Root Extract',
                 'description' => 'Energy and libido support supplement for men and women',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 680.00,
                 'current_price' => 612.00,
                 'discount_percentage' => 10,
@@ -1259,7 +1259,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Condoms Dotted & Ribbed',
                 'description' => 'Textured condoms for extra pleasure (Pack of 10)',
-                'category' => 'Sexual Wellness',
+                'category' => 'eproductive Wellness',
                 'old_price' => 350.00,
                 'current_price' => 315.00,
                 'discount_percentage' => 10,
@@ -1269,7 +1269,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Delay Spray for Men',
                 'description' => 'Desensitizing spray for premature ejaculation control',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 750.00,
                 'current_price' => 675.00,
                 'discount_percentage' => 10,
@@ -1279,7 +1279,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Sildenafil 50mg',
                 'description' => 'Erectile dysfunction medication for improved performance',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 400.00,
                 'current_price' => 360.00,
                 'discount_percentage' => 10,
@@ -1289,7 +1289,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Tadalafil 20mg',
                 'description' => 'Long-acting ED medication for up to 36 hours',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 500.00,
                 'current_price' => 450.00,
                 'discount_percentage' => 10,
@@ -1299,7 +1299,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Arousal Gel for Women',
                 'description' => 'Intimate sensation gel for enhanced arousal',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 550.00,
                 'current_price' => 495.00,
                 'discount_percentage' => 10,
@@ -1309,7 +1309,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'L-Arginine 1000mg',
                 'description' => 'Amino acid supplement for blood flow and stamina',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 520.00,
                 'current_price' => 468.00,
                 'discount_percentage' => 10,
@@ -1319,7 +1319,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Condoms Extra Large',
                 'description' => 'Larger size premium condoms for comfort (Pack of 10)',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 380.00,
                 'current_price' => 342.00,
                 'discount_percentage' => 10,
@@ -1329,7 +1329,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Horny Goat Weed Extract',
                 'description' => 'Traditional herbal supplement for vitality and energy',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 620.00,
                 'current_price' => 558.00,
                 'discount_percentage' => 10,
@@ -1339,7 +1339,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Massage Oil Sensual',
                 'description' => 'Warming massage oil with natural aphrodisiac oils',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 480.00,
                 'current_price' => 432.00,
                 'discount_percentage' => 10,
@@ -1349,7 +1349,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Zinc + Magnesium Complex',
                 'description' => 'Mineral supplement for testosterone production support',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 420.00,
                 'current_price' => 378.00,
                 'discount_percentage' => 10,
@@ -1359,7 +1359,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Condoms Flavored Variety',
                 'description' => 'Assorted flavored condoms for oral pleasure (Pack of 12)',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 320.00,
                 'current_price' => 288.00,
                 'discount_percentage' => 10,
@@ -1369,7 +1369,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Tribulus Terrestris 1000mg',
                 'description' => 'Natural testosterone and athletic performance booster',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 580.00,
                 'current_price' => 522.00,
                 'discount_percentage' => 10,
@@ -1379,7 +1379,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Silicone Lubricant',
                 'description' => 'Long-lasting premium silicone-based intimate lubricant',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 650.00,
                 'current_price' => 585.00,
                 'discount_percentage' => 10,
@@ -1389,7 +1389,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Female Libido Enhancer',
                 'description' => 'Natural herbal blend for women\'s desire and arousal',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 720.00,
                 'current_price' => 648.00,
                 'discount_percentage' => 10,
@@ -1399,7 +1399,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Prostate Support Formula',
                 'description' => 'Saw palmetto and zinc for men\'s prostate health',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 780.00,
                 'current_price' => 702.00,
                 'discount_percentage' => 10,
@@ -1409,7 +1409,7 @@ class MedicinesTableSeeder extends Seeder
             [
                 'name' => 'Fertility Support for Men',
                 'description' => 'Comprehensive male fertility supplement with antioxidants',
-                'category' => 'Sexual Wellness',
+                'category' => 'Reproductive Wellness',
                 'old_price' => 850.00,
                 'current_price' => 765.00,
                 'discount_percentage' => 10,

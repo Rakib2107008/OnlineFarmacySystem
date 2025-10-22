@@ -11,10 +11,15 @@ class MedicineController extends Controller
     /**
      * Display a listing of the medicines.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $medicines = Medicines::orderBy('id', 'desc')->paginate(10);
-        return view('admin.medicine.index', compact('medicines'));
+        $category = $request->get('category', 'Medicines'); // Default to 'Medicines'
+        
+        $medicines = Medicines::where('category', $category)
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+        
+        return view('admin.catagories.index', compact('medicines', 'category'));
     }
 
     /**
@@ -22,7 +27,7 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        return view('admin.medicine.create');
+        return view('admin.catagories.create');
     }
 
     /**
@@ -73,7 +78,7 @@ class MedicineController extends Controller
             'stock' => $request->stock,
         ]);
 
-        return redirect()->route('admin.medicine.index')
+        return redirect()->route('admin.categories.index')
             ->with('success', 'Medicine created successfully!');
     }
 
@@ -83,7 +88,7 @@ class MedicineController extends Controller
     public function show($id)
     {
         $medicines = Medicines::findOrFail($id);
-        return view('admin.medicine.show', compact('medicines'));
+        return view('admin.catagories.show', compact('medicines'));
     }
 
     /**
@@ -92,7 +97,7 @@ class MedicineController extends Controller
     public function edit($id)
     {
         $medicines = Medicines::findOrFail($id);
-        return view('admin.medicine.edit', compact('medicines'));
+        return view('admin.catagories.edit', compact('medicines'));
     }
 
     /**
@@ -150,7 +155,7 @@ class MedicineController extends Controller
             'stock' => $request->stock,
         ]);
 
-        return redirect()->route('admin.medicine.index')
+        return redirect()->route('admin.categories.index')
             ->with('success', 'Medicine updated successfully!');
     }
 
@@ -168,7 +173,7 @@ class MedicineController extends Controller
 
         $medicines->delete();
 
-        return redirect()->route('admin.medicine.index')
+        return redirect()->route('admin.categories.index')
             ->with('success', 'Medicine deleted successfully!');
     }
 
