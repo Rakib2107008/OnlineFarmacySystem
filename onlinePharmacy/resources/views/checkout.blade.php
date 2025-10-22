@@ -507,6 +507,17 @@
         <div class="checkout-card">
           <h3 class="card-title">Delivery Information</h3>
           
+          <!-- Offer Active Banner -->
+          <div id="offerActiveBanner" style="display: none; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 15px 20px; margin-bottom: 20px; border-radius: 8px; border-left: 5px solid #155724; box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <i class="fas fa-tags" style="font-size: 24px;"></i>
+              <div>
+                <strong style="font-size: 16px; display: block;">🎉 First Order Discount Active!</strong>
+                <span style="font-size: 14px; opacity: 0.95;">You're getting 50% OFF on this order. Phone number is locked for verification.</span>
+              </div>
+            </div>
+          </div>
+          
           <!-- Display Error Messages -->
           @if(session('error'))
             <div style="background: #fee; color: #c00; padding: 15px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #fcc;">
@@ -534,7 +545,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label">Receiver Phone <span class="required">(Required)</span></label>
-                <input type="tel" class="form-input" name="receiver_phone" required placeholder="Enter phone number">
+                <input type="tel" class="form-input" name="receiver_phone" id="receiverPhoneInput" required placeholder="Enter phone number">
               </div>
             </div>
 
@@ -583,6 +594,7 @@
                     <i class="fas fa-money-bill-wave"></i> Cash On Delivery
                   </label>
                 </div>
+                
                 <div class="payment-note">
                   <p><strong>*** Please pay first for outside Dhaka delivery (ঢাকার বাহিরের অর্ডারের ক্ষেত্রে ক্যাশ অন ডেলিভারি প্রযোজ্য নয়)</strong></p>
                   <p><strong>*** Payment will be collected when delivery is made (ডেলিভারি মেন করার সময় পেমেন্ট নেওয়া হবে। পণ্য পরীক্ষা করার পরে আপনি পেমেন্ট করতে পারবেন)</strong></p>
@@ -604,6 +616,8 @@
 
             <input type="hidden" name="cart_items" id="cartItemsInput">
             <input type="hidden" name="coupon_code" id="couponInput">
+            <input type="hidden" name="offer_discount" id="offerDiscountInput">
+            <input type="hidden" name="offer_phone" id="offerPhoneInput">
             
             </div>
           </form>
@@ -617,6 +631,11 @@
         <div class="summary-row">
           <span class="summary-label">Amount (tax incl.):</span>
           <span class="summary-value" id="summaryAmount">255.00 TK</span>
+        </div>
+        
+        <div class="summary-row" id="discountRow" style="display: none;">
+          <span class="summary-label" style="color: #28a745;">Discount (50%):</span>
+          <span class="summary-value" id="summaryDiscount" style="color: #28a745;">- 0 TK</span>
         </div>
         
         <div class="summary-row">
@@ -755,12 +774,26 @@
     
     tbody.innerHTML = itemsHTML;
     
+    // Get offer discount from localStorage
+    const offerDiscount = localStorage.getItem('offerDiscount');
+    const discountAmount = offerDiscount ? subtotal * parseFloat(offerDiscount) : 0;
+    
     // Update totals
     const deliveryCharge = 0; // Will be calculated based on location
-    const total = subtotal + deliveryCharge;
+    const total = (subtotal - discountAmount) + deliveryCharge;
     
     document.getElementById('tableTotal').textContent = `৳ ${subtotal.toFixed(2)}`;
     document.getElementById('summaryAmount').textContent = `${subtotal.toFixed(2)} TK`;
+    
+    // Show/hide discount row
+    const discountRow = document.getElementById('discountRow');
+    if (discountAmount > 0) {
+      discountRow.style.display = 'flex';
+      document.getElementById('summaryDiscount').textContent = `- ${discountAmount.toFixed(2)} TK`;
+    } else {
+      discountRow.style.display = 'none';
+    }
+    
     document.getElementById('summaryDelivery').textContent = `${deliveryCharge} TK`;
     document.getElementById('summaryTotalAmount').textContent = `${total.toFixed(2)} TK`;
   }
@@ -780,6 +813,26 @@
   // Initialize checkout on page load
   document.addEventListener('DOMContentLoaded', function() {
     renderCheckout();
+    
+    // Auto-fill and lock phone number if offer is active
+    const offerPhone = localStorage.getItem('offerPhone');
+    const offerDiscount = localStorage.getItem('offerDiscount');
+    const receiverPhoneInput = document.getElementById('receiverPhoneInput');
+    const offerBanner = document.getElementById('offerActiveBanner');
+    
+    if (offerPhone && offerDiscount && receiverPhoneInput) {
+      // Auto-fill and lock phone number
+      receiverPhoneInput.value = offerPhone;
+      receiverPhoneInput.readOnly = true;
+      receiverPhoneInput.style.backgroundColor = '#f0f0f0';
+      receiverPhoneInput.style.cursor = 'not-allowed';
+      receiverPhoneInput.title = 'Phone number is locked for offer redemption';
+      
+      // Show offer banner
+      if (offerBanner) {
+        offerBanner.style.display = 'block';
+      }
+    }
     
     // Handle payment method toggle
     const codRadio = document.getElementById('cod');
@@ -815,6 +868,12 @@
       
       // Populate hidden cart_items field with JSON
       document.getElementById('cartItemsInput').value = JSON.stringify(cartData.items);
+      
+      // Populate offer discount and phone from localStorage
+      const offerDiscount = localStorage.getItem('offerDiscount') || '';
+      const offerPhone = localStorage.getItem('offerPhone') || '';
+      document.getElementById('offerDiscountInput').value = offerDiscount;
+      document.getElementById('offerPhoneInput').value = offerPhone;
       
       // Show loading state
       const submitBtn = document.querySelector('.place-order-btn');

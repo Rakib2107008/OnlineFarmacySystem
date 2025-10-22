@@ -10,6 +10,17 @@ use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SslCommerzTestController;
+use App\Http\Controllers\AdminCustomerController;
+use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\CustomerAuthController;
+use App\Http\Controllers\CustomerAccountController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\OrderHistoryController;
+use App\Http\Controllers\PrescriptionController;
+use App\Http\Controllers\AdminPrescriptionController;
+use App\Http\Controllers\OfferController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +37,16 @@ Route::get('/', function () {
     $products = Products::all();
     return view('welcome', compact('products'));
 })->name('home');
+
+// Search Routes
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+
+// Order History Routes
+Route::get('/order-history', [OrderHistoryController::class, 'index'])->name('order.history');
+Route::get('/order-history/search', [OrderHistoryController::class, 'search'])->name('order.history.search');
+
+// Offer Routes
+Route::post('/offer/check-eligibility', [OfferController::class, 'checkEligibility'])->name('offer.checkEligibility');
 
 // Cart Route
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
@@ -51,10 +72,10 @@ Route::get('/diabeticCare', function () {
     return view('diabeticCare', compact('medicines'));
 })->name('diabeticCare');
 
-Route::get('/sexualWellbeing', function () {
-    $medicines = Medicines::where('category', 'Sexual Wellness')->paginate(12);
-    return view('sexualWellbeing', compact('medicines'));
-})->name('sexualWellbeing');
+Route::get('/reproductiveWellbeing', function () {
+    $medicines = Medicines::where('category', 'Reproductive Wellness')->paginate(12);
+    return view('reproductiveWellbeing', compact('medicines'));
+})->name('reproductiveWellbeing');
 Route::get('/vitaminSupplyments', function () {
     $medicines = Medicines::where('category', 'Vitamin Supplements')->paginate(12);
     return view('vitaminSupplyments', compact('medicines'));
@@ -67,16 +88,98 @@ Route::get('/babyMom', function () {
     $medicines = Medicines::where('category', 'Baby & Mom')->paginate(12);
     return view('babyMom', compact('medicines'));
 })->name('babyMom');
-// Admin Routes
-Route::prefix('admin')->name('admin.')->group(function () {
+
+// Customer Authentication Routes (Guest only)
+Route::middleware(['customer.guest'])->group(function () {
+    Route::get('customer/login', [CustomerAuthController::class, 'showLogin'])->name('customer.login');
+    Route::post('customer/login', [CustomerAuthController::class, 'login'])->name('customer.login.post');
+    Route::get('customer/signup', [CustomerAuthController::class, 'showSignup'])->name('customer.signup');
+    Route::post('customer/signup', [CustomerAuthController::class, 'signup'])->name('customer.signup.post');
+});
+
+// Customer Logout (authenticated only)
+Route::post('customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout')->middleware('customer.auth');
+
+// Customer Account Routes (Protected)
+Route::middleware(['customer.auth'])->group(function () {
+    Route::get('customer/account', [CustomerAccountController::class, 'index'])->name('customer.account');
+    Route::get('customer/order/{orderId}', [CustomerAccountController::class, 'orderDetails'])->name('customer.order.details');
+});
+
+// Prescription Routes (Protected - Customer must be logged in)
+Route::middleware(['customer.auth'])->group(function () {
+    Route::get('/upload-prescription', [PrescriptionController::class, 'index'])->name('upload.prescription');
+    Route::post('/upload-prescription', [PrescriptionController::class, 'store'])->name('prescription.store');
+});
+
+// Additional Page Routes (placeholders for now - you can create controllers for these later)
+Route::get('/health-products', function () {
+    return view('healthProducts');
+})->name('health.products');
+
+
+
+
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+Route::get('/privacy-policy', function () {
+    return view('privacyPolicy');
+})->name('privacy.policy');
+
+Route::get('/return-policy', function () {
+    return view('returnPolicy');
+})->name('return.policy');
+
+Route::get('/terms-conditions', function () {
+    return view('termsConditions');
+})->name('terms.conditions');
+
+// Admin Authentication Routes (Guest only)
+Route::middleware(['admin.guest'])->group(function () {
+    Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.login.post');
+});
+
+// Admin Logout (authenticated only)
+Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout')->middleware('admin.auth');
+
+// Admin Routes (Protected)
+Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(function () {
+    
+    // Dashboard and Analytics
+    Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('analytics', [AdminDashboardController::class, 'analytics'])->name('analytics');
     
     // Product Management Routes
     Route::resource('products', AdminProductController::class);
     
-    // Medicine Management Routes (singular: medicine)
-    Route::resource('medicine', MedicineController::class)->parameters([
-        'medicine' => 'id'
+    // Categories (Medicines) Management Routes
+    Route::resource('categories', MedicineController::class)->parameters([
+        'categories' => 'id'
     ]);
+    
+    // Customer Management Routes (no create)
+    Route::get('customers', [AdminCustomerController::class, 'index'])->name('customers.index');
+    Route::get('customers/{id}', [AdminCustomerController::class, 'show'])->name('customers.show');
+    Route::get('customers/{id}/edit', [AdminCustomerController::class, 'edit'])->name('customers.edit');
+    Route::put('customers/{id}', [AdminCustomerController::class, 'update'])->name('customers.update');
+    Route::delete('customers/{id}', [AdminCustomerController::class, 'destroy'])->name('customers.destroy');
+    
+    // Order Management Routes (no create)
+    Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{id}', [AdminOrderController::class, 'show'])->name('orders.show');
+    Route::get('orders/{id}/edit', [AdminOrderController::class, 'edit'])->name('orders.edit');
+    Route::put('orders/{id}', [AdminOrderController::class, 'update'])->name('orders.update');
+    Route::delete('orders/{id}', [AdminOrderController::class, 'destroy'])->name('orders.destroy');
+    
+    // Prescription Management Routes
+    Route::get('prescriptions', [AdminPrescriptionController::class, 'index'])->name('prescriptions.index');
+    Route::get('prescriptions/{id}', [AdminPrescriptionController::class, 'show'])->name('prescriptions.show');
+    Route::put('prescriptions/{id}/update-status', [AdminPrescriptionController::class, 'updateStatus'])->name('prescriptions.updateStatus');
+    Route::delete('prescriptions/{id}', [AdminPrescriptionController::class, 'destroy'])->name('prescriptions.destroy');
     
 });
 
@@ -104,9 +207,6 @@ Route::post('/payment/cancel', [SslCommerzTestController::class, 'cancel'])->nam
 
 // Order Confirmation Route
 Route::get('/order/confirmation/{order_id}', [CheckoutController::class, 'orderConfirmation'])->name('order.confirmation');
-
-// Redirect /admin/medicines (plural) to /admin/medicine (singular) for convenience
-Route::redirect('/admin/medicines', '/admin/medicine', 301);
 
 /*
 |--------------------------------------------------------------------------

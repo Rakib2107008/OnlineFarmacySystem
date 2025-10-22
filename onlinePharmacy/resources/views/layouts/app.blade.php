@@ -379,8 +379,10 @@
     </div>
     <div class="header-right">
       <div class="header-search">
-        <input type="text" placeholder="Search medicines, products...">
-        <button><i class="fas fa-search"></i></button>
+        <form action="{{ route('search') }}" method="GET" style="display: flex; width: 100%;">
+          <input type="text" name="query" placeholder="Search medicines, products..." required>
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
       </div>
       <div class="header-icons">
         <div class="header-location">
@@ -425,41 +427,33 @@
           <i class="fas fa-user"></i>
         </div>
         <div class="user-text">
-          <h4>Hi, there!</h4>
-          <a href="#">Login/ Sign up</a>
+          @if(session()->has('customer_id'))
+            <h4>Hi, {{ session('customer_name') }}!</h4>
+            <a href="{{ route('customer.account') }}">My Account</a>
+          @else
+            <h4>Hi, there!</h4>
+            <a href="{{ route('customer.login') }}">Login/ Sign up</a>
+          @endif
         </div>
       </div>
       <div class="search-sidebar">
-        <input type="text" placeholder="Search...">
-        <i class="fas fa-search"></i>
+        <form action="{{ route('search') }}" method="GET" style="position: relative;">
+          <input type="text" name="query" placeholder="Search..." required>
+          <button type="submit" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">
+            <i class="fas fa-search" style="color: #0066cc;"></i>
+          </button>
+        </form>
       </div>
     </div>
 
     <!-- Main Menu List -->
     <ul class="menu-list">
-      <li><a href="#"><i class="fas fa-user-circle"></i> My Account</a></li>
-      <li><a href="#"><i class="fas fa-receipt"></i> Order History</a></li>
-      <li><a href="#"><i class="fas fa-truck"></i> Track Order</a></li>
-      <li><a href="#"><i class="fas fa-file-prescription"></i> Prescription & Report</a></li>
-      <li><a href="#"><i class="fas fa-pills"></i> Medicine Request</a></li>
+ <li><a href="{{ route('home') }}"><i class="fas fa-chevron-right"></i> Home</a></li>
+    <li><a href="{{ route('customer.account') }}"><i class="fas fa-chevron-right"></i> My Account</a></li>
+            <li><a href="{{ route('order.history') }}"><i class="fas fa-history"></i> Order History</a></li>
+            <li><a href="{{ route('medicines') }}"><i class="fas fa-pills"></i> Medicines</a></li>
     </ul>
-
-    <!-- My Offer Section -->
-    <div style="padding: 20px 0;">
-      <div style="padding: 0 20px;">
-        <h6 style="color: #0066cc; font-size: 14px; display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-          <i class="fas fa-star" style="color: #ffd700;"></i> My Offer <i class="fas fa-star" style="color: #ffd700;"></i>
-        </h6>
-      </div>
-      <ul class="menu-list" style="border-top: 1px solid #f0f0f0;">
-        <li><a href="#"><i class="fas fa-heart"></i> Personal Care</a></li>
-        <li><a href="#"><i class="fas fa-baby"></i> Baby & Mom</a></li>
-        <li><a href="#"><i class="fas fa-heartbeat"></i> Sexual Wellbeing</a></li>
-        <li><a href="#"><i class="fas fa-syringe"></i> Diabetic Care</a></li>
-      </ul>
-    </div>
-
-    <!-- Cart Section -->
+ <!-- Cart Section -->
     <a href="{{ route('cart') }}" class="cart-section-link" aria-label="View cart">
       <div class="cart-section">
         <div class="cart-badge">
@@ -470,16 +464,33 @@
         </div>
       </div>
     </a>
+    <!-- My Offer Section -->
+    <!-- <div style="padding: 20px 0;">
+      <div style="padding: 0 20px;">
+        <h6 style="color: #0066cc; font-size: 14px; display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+          <i class="fas fa-star" style="color: #ffd700;"></i> My Offer <i class="fas fa-star" style="color: #ffd700;"></i>
+        </h6>
+      </div> -->
+      <ul class="menu-list" style="border-top: 1px solid #f0f0f0;">
+             <li><a href="{{ route('upload.prescription') }}"><i class="fas fa-chevron-right"></i> Upload Prescription</a></li>
+        <li><a href="{{ route('personalCare') }}"><i class="fas fa-heart"></i> Personal Care</a></li>
+        <li><a href="{{ route('babyMom') }}"><i class="fas fa-baby"></i> Baby & Mom</a></li>
+        <li><a href="{{ route('diabeticCare') }}"><i class="fas fa-syringe"></i> Diabetic Care</a></li>
+        <li><a href="{{ route('reproductiveWellbeing') }}"><i class="fas fa-heartbeat"></i> Reproductive Wellbeing</a></li>
+      </ul>
+    </div>
+
+   
 
     <!-- Sidebar Footer -->
     <div class="sidebar-footer">
       <div class="footer-links">
-        <a href="#">Call for Enquiry</a>
-        <a href="#">Privacy Policy</a>
+        <a href="{{ route('contact') }}">Call for Enquiry</a>
+        <a href="{{ route('privacy.policy') }}">Privacy Policy</a>
       </div>
       <div class="footer-links">
-        <a href="#">Return Policy</a>
-        <a href="#">Terms & Conditions</a>
+        <a href="{{ route('return.policy') }}">Return Policy</a>
+        <a href="{{ route('terms.conditions') }}">Terms & Conditions</a>
       </div>
 
       <!-- Social Media Icons -->
@@ -525,11 +536,11 @@
         <div class="footer-section">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="/"><i class="fas fa-chevron-right"></i> Home</a></li>
-            <li><a href="/medicines"><i class="fas fa-chevron-right"></i> Medicines</a></li>
-            <li><a href="#"><i class="fas fa-chevron-right"></i> Health Products</a></li>
-            <li><a href="#"><i class="fas fa-chevron-right"></i> Upload Prescription</a></li>
-            <li><a href="#"><i class="fas fa-chevron-right"></i> Track Order</a></li>
+            <li><a href="{{ route('home') }}"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="{{ route('medicines') }}"><i class="fas fa-chevron-right"></i> Medicines Request</a></li>
+            <li><a href="{{ route('vitaminSupplyments') }}"><i class="fas fa-chevron-right"></i> Health Products</a></li>
+            <li><a href="{{ route('upload.prescription') }}"><i class="fas fa-chevron-right"></i> Upload Prescription</a></li>
+            <li><a href="{{ route('customer.account') }}"><i class="fas fa-chevron-right"></i> My Orders</a></li>
           </ul>
         </div>
 
@@ -537,11 +548,11 @@
         <div class="footer-section">
           <h3>Customer Service</h3>
           <ul>
-            <li><a href="#"><i class="fas fa-chevron-right"></i> My Account</a></li>
-            <li><a href="#"><i class="fas fa-chevron-right"></i> Order History</a></li>
-            <li><a href="#"><i class="fas fa-chevron-right"></i> Return Policy</a></li>
-            <li><a href="#"><i class="fas fa-chevron-right"></i> Terms & Conditions</a></li>
-            <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+            <li><a href="{{ route('customer.account') }}"><i class="fas fa-chevron-right"></i> My Account</a></li>
+            <li><a href="{{ route('customer.account') }}"><i class="fas fa-chevron-right"></i> Order History</a></li>
+            <li><a href="{{ route('return.policy') }}"><i class="fas fa-chevron-right"></i> Return Policy</a></li>
+            <li><a href="{{ route('terms.conditions') }}"><i class="fas fa-chevron-right"></i> Terms & Conditions</a></li>
+            <li><a href="{{ route('privacy.policy') }}"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
           </ul>
         </div>
 
@@ -568,7 +579,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2025 <a href="#">Online Pharmacy</a>. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: #ff4757;"></i> by Your Team</p>
+        <p>&copy; 2025 <a href="#">Online Pharmacy</a>. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: #ff4757;"></i> by our developers Team</p>
       </div>
     </div>
   </footer>
@@ -767,20 +778,29 @@
         };
       };
 
-      const loadState = () => {
+      const loadState = async () => {
         try {
-          const raw = window.localStorage.getItem(STORAGE_KEY);
-          if (!raw) {
+          const csrfToken = getCsrfToken();
+          const response = await fetch('/cart/session/get', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {}),
+            },
+          });
+
+          if (!response.ok) {
+            console.warn('Failed to load cart from session');
             return { ...defaultState };
           }
 
-          const parsed = JSON.parse(raw);
-          if (!parsed || !Array.isArray(parsed.items)) {
+          const data = await response.json();
+          if (!data || !Array.isArray(data.items)) {
             return { ...defaultState };
           }
 
           const deduped = [];
-          parsed.items.forEach((item) => {
+          data.items.forEach((item) => {
             const candidate = cloneItem(item);
             if (!candidate) {
               return;
@@ -804,28 +824,14 @@
           return { items: deduped };
         } catch (error) {
           console.warn('Floating cart load failed, resetting state.', error);
-          window.localStorage.removeItem(STORAGE_KEY);
           return { ...defaultState };
         }
       };
 
-      const saveState = (state) => {
-        const payload = {
-          items: Array.isArray(state.items)
-            ? state.items.map((item) => ({
-                key: item.key,
-                id: item.id,
-                tableType: item.tableType,
-                price: item.price,
-                quantity: item.quantity,
-                name: item.name,
-                image: item.image,
-                imageUrl: item.imageUrl,
-                availableStock: item.availableStock,
-              }))
-            : [],
-        };
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      const saveState = async (state) => {
+        // Session saving is handled by individual cart operations (add/update/remove)
+        // This function is kept for compatibility but does nothing
+        return true;
       };
 
       const computeTotals = (state) => state.items.reduce(
@@ -881,8 +887,8 @@
         }));
       };
 
-      const syncFromStorage = () => {
-        window.cartData = loadState();
+      const syncFromStorage = async () => {
+        window.cartData = await loadState();
         updateUi();
       };
 
@@ -896,92 +902,51 @@
           return false;
         }
 
-        if (!window.cartData || !Array.isArray(window.cartData.items)) {
-          window.cartData = { ...defaultState, items: [] };
-        }
+        try {
+          const csrfToken = getCsrfToken();
+          const response = await fetch('/cart/session/add', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {}),
+            },
+            body: JSON.stringify({
+              id: normalisedId,
+              name: name || '',
+              price: fallbackPrice,
+              tableType: requestedType,
+              quantity: 1,
+            }),
+          });
 
-        const key = `${requestedType}_${normalisedId}`;
-        let existing = window.cartData.items.find((item) => item.key === key);
-
-        const ensureDetails = async () => {
-          if (existing && existing.availableStock !== undefined && existing.image && existing.price > 0) {
-            return existing;
-          }
-
-          try {
-            const details = await fetchCartItemDetails(requestedType, normalisedId);
-            const dbPrice = normaliseNumber(details.current_price ?? details.price ?? fallbackPrice);
-            const availableStock = details.stock !== undefined && details.stock !== null
-              ? Math.max(0, Math.floor(normaliseNumber(details.stock)))
-              : undefined;
-            const imagePath = resolveImagePathInternal(details.image_path ?? details.image ?? details.image_url);
-            const imageUrl = imagePath ? resolveImageUrlInternal(imagePath) : resolveImageUrlInternal(details.image_url);
-            const resolvedName = details.name || name;
-
-            if (!existing) {
-              existing = {
-                key,
-                id: normalisedId,
-                tableType: requestedType,
-                price: dbPrice || fallbackPrice,
-                quantity: 0,
-                name: resolvedName ? String(resolvedName) : undefined,
-                image: imagePath,
-                imageUrl,
-                availableStock,
-              };
-              window.cartData.items.push(existing);
+          if (!response.ok) {
+            const errorData = await response.json();
+            if (errorData.error === 'Insufficient stock') {
+              alert('This product is out of stock.');
             } else {
-              existing.price = dbPrice || existing.price || fallbackPrice;
-              existing.name = resolvedName ? String(resolvedName) : existing.name;
-              if (!existing.image && imagePath) {
-                existing.image = imagePath;
-              }
-              if (!existing.imageUrl && imageUrl) {
-                existing.imageUrl = imageUrl;
-              }
-              if (availableStock !== undefined) {
-                existing.availableStock = availableStock;
-              }
+              alert('Unable to add this product right now. Please try again later.');
             }
-          } catch (error) {
-            console.error('Floating cart: failed to load item details.', error);
-            alert('Unable to add this product right now. Please try again later.');
-            return null;
+            return false;
           }
 
-          return existing;
-        };
+          const data = await response.json();
+          if (data.success && data.cart) {
+            window.cartData = data.cart;
+            updateUi();
+            return true;
+          }
 
-        const hydratedItem = await ensureDetails();
-        if (!hydratedItem) {
-          // remove placeholder if we created one without data
-          window.cartData.items = window.cartData.items.filter((item) => item.key !== key || item === existing);
+          return false;
+        } catch (error) {
+          console.error('Floating cart: failed to add item.', error);
+          alert('Unable to add this product right now. Please try again later.');
           return false;
         }
-
-        const availableStock = hydratedItem.availableStock;
-        const alreadySelected = hydratedItem.quantity || 0;
-
-        if (availableStock !== undefined && availableStock - (alreadySelected + 1) < 0) {
-          alert('This product is out of stock.');
-          return false;
-        }
-
-        hydratedItem.quantity = alreadySelected + 1;
-        hydratedItem.price = hydratedItem.price || fallbackPrice;
-        hydratedItem.tableType = requestedType;
-        hydratedItem.imageUrl = hydratedItem.imageUrl || resolveImageUrlInternal(hydratedItem.image);
-        hydratedItem.image = hydratedItem.image || resolveImagePathInternal(hydratedItem.imageUrl);
-
-        saveState(window.cartData);
-        updateUi();
-        return true;
       };
 
-      const initialiseCartUi = () => {
+      const initialiseCartUi = async () => {
         cacheElements();
-        syncFromStorage();
+        await syncFromStorage();
       };
 
       if (document.readyState === 'loading') {
@@ -990,27 +955,33 @@
         initialiseCartUi();
       }
 
-      const resyncEvents = ['pageshow', 'focus', 'visibilitychange'];
+      const resyncEvents = ['pageshow', 'focus'];
       resyncEvents.forEach((eventName) => {
         window.addEventListener(eventName, syncFromStorage);
       });
 
-      window.addEventListener('storage', (event) => {
-        if (event.key === STORAGE_KEY) {
-          syncFromStorage();
-        }
+      // Custom event for cart updates from other parts of the application
+      window.addEventListener('cart-updated', (event) => {
+        syncFromStorage();
       });
 
       // Provide initial state for scripts that run before DOM ready.
-      window.cartData = loadState();
+      loadState().then(state => {
+        window.cartData = state;
+      });
     })();
   </script>
 
   @if(session('clear_cart'))
     <script>
-      // Clear cart after successful order
-      localStorage.removeItem('floatingCartState');
-      window.dispatchEvent(new Event('storage'));
+      // Cart cleared on server-side session, trigger UI update
+      if (window.cartData) {
+        window.cartData = { items: [] };
+        if (typeof updateUi === 'function') {
+          updateUi();
+        }
+      }
+      window.dispatchEvent(new CustomEvent('cart-updated'));
     </script>
   @endif
 

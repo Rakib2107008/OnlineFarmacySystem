@@ -17,6 +17,14 @@ return Application::configure(basePath: dirname(__DIR__))
             '/payment/fail',
             '/payment/cancel',
         ]);
+        
+        // Register custom middleware aliases
+        $middleware->alias([
+            'admin.auth' => \App\Http\Middleware\AdminAuth::class,
+            'customer.auth' => \App\Http\Middleware\CustomerAuth::class,
+            'admin.guest' => \App\Http\Middleware\RedirectIfAdminAuthenticated::class,
+            'customer.guest' => \App\Http\Middleware\RedirectIfCustomerAuthenticated::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

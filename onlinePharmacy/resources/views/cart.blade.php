@@ -375,6 +375,17 @@
       <h1><i class="fa fa-shopping-cart"></i> Happy Shopping!!</h1>
     </div>
 
+    <!-- Offer Active Banner -->
+    <div id="offerActiveBanner" style="display: none; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 18px 25px; margin: 20px auto; max-width: 1400px; border-radius: 10px; border-left: 6px solid #155724; box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);">
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <i class="fas fa-gift" style="font-size: 32px;"></i>
+        <div>
+          <strong style="font-size: 18px; display: block; margin-bottom: 5px;">🎉 Congratulations! First Order Discount Applied!</strong>
+          <span style="font-size: 15px; opacity: 0.95;">You're getting 50% OFF on your entire order. Your phone number (<span id="offerPhoneDisplay"></span>) is locked for verification.</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Loading State -->
     <div id="loadingState" class="loading-spinner" style="display: none;">
       <div class="spinner"></div>
@@ -405,6 +416,10 @@
           <div class="summary-row">
             <span class="summary-label">Subtotal:</span>
             <span class="summary-value" id="summarySubtotal">৳ 0.00</span>
+          </div>
+          <div class="summary-row" id="discountRow" style="display: none;">
+            <span class="summary-label" style="color: #28a745;">Discount (50%):</span>
+            <span class="summary-value" style="color: #28a745;" id="summaryDiscount">- ৳ 0.00</span>
           </div>
           <div class="summary-row">
             <span class="summary-label">Delivery Fee:</span>
@@ -549,13 +564,26 @@
     
     cartItemsList.innerHTML = itemsHTML;
     
+    // Check for offer discount
+    const offerDiscount = localStorage.getItem('offerDiscount');
+    const discountAmount = offerDiscount ? subtotal * parseFloat(offerDiscount) : 0;
+    
     // Update summary
     const deliveryFee = 50;
-    const total = subtotal + deliveryFee;
+    const total = (subtotal - discountAmount) + deliveryFee;
     
     document.getElementById('cartItemCount').textContent = `${totalCount} Item${totalCount !== 1 ? 's' : ''}`;
     document.getElementById('summaryItemCount').textContent = totalCount;
     document.getElementById('summarySubtotal').textContent = `৳ ${subtotal.toFixed(2)}`;
+    
+    // Show/hide discount row
+    if (discountAmount > 0) {
+      document.getElementById('discountRow').style.display = 'flex';
+      document.getElementById('summaryDiscount').textContent = `- ৳ ${discountAmount.toFixed(2)}`;
+    } else {
+      document.getElementById('discountRow').style.display = 'none';
+    }
+    
     document.getElementById('summaryTotal').textContent = `৳ ${total.toFixed(2)}`;
   }
 
@@ -577,6 +605,19 @@
     
     setTimeout(() => {
       renderCart();
+      
+      // Show offer banner if active
+      const offerPhone = localStorage.getItem('offerPhone');
+      const offerDiscount = localStorage.getItem('offerDiscount');
+      const offerBanner = document.getElementById('offerActiveBanner');
+      const offerPhoneDisplay = document.getElementById('offerPhoneDisplay');
+      
+      if (offerPhone && offerDiscount && offerBanner) {
+        offerBanner.style.display = 'block';
+        if (offerPhoneDisplay) {
+          offerPhoneDisplay.textContent = offerPhone;
+        }
+      }
     }, 500);
   });
 

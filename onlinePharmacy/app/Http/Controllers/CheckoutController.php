@@ -33,6 +33,8 @@ class CheckoutController extends Controller
             'address' => 'required',
             'payment_method' => 'required',
             'cart_items' => 'required|string',
+            'offer_discount' => 'nullable|numeric|between:0,1',
+            'offer_phone' => 'nullable|string',
         ]);
         
         // Decode cart items
@@ -43,11 +45,21 @@ class CheckoutController extends Controller
             return back()->with('error', 'Your cart is empty! Please add items before placing an order.');
         }
         
-        // Calculate total amount
-        $totalAmount = 0;
+        // Calculate subtotal
+        $subtotal = 0;
         foreach ($cartItems as $item) {
-            $totalAmount += $item['price'] * $item['quantity'];
+            $subtotal += $item['price'] * $item['quantity'];
         }
+        
+        // Apply offer discount if available
+        $discount = 0;
+        if (isset($validated['offer_discount']) && $validated['offer_discount'] > 0) {
+            $discount = $subtotal * floatval($validated['offer_discount']);
+        }
+        
+        // Calculate total amount (subtotal - discount + delivery fee)
+        $deliveryFee = 50;
+        $totalAmount = ($subtotal - $discount) + $deliveryFee;
         
         // Generate transaction ID
         $transactionId = 'TXN-' . time() . '-' . rand(1000, 9999);
@@ -63,12 +75,18 @@ class CheckoutController extends Controller
             'address' => $validated['address'],
             'payment_method' => $validated['payment_method'],
             'total_amount' => $totalAmount,
+            'subtotal' => $subtotal,
+            'discount' => $discount,
             'cart_items' => $cartItems,
             'transaction_id' => $transactionId,
+            'offer_phone' => $validated['offer_phone'] ?? null,
         ], 3600);
         
         Log::info('=== ORDER PROCESSING ===');
         Log::info('Transaction ID: ' . $transactionId);
+        Log::info('Subtotal: ' . $subtotal);
+        Log::info('Discount: ' . $discount);
+        Log::info('Total Amount: ' . $totalAmount);
         Log::info('Cache data saved for: pending_order_' . $transactionId);
         
         // Redirect to payment gateway

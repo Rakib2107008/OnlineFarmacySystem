@@ -12,20 +12,12 @@ class CustomerAuthController extends Controller
     // Show login page
     public function showLogin()
     {
-        // Redirect to my account if already logged in
-        if (session()->has('customer_id')) {
-            return redirect()->route('customer.account');
-        }
         return view('customer.login');
     }
 
     // Show signup page
     public function showSignup()
     {
-        // Redirect to my account if already logged in
-        if (session()->has('customer_id')) {
-            return redirect()->route('customer.account');
-        }
         return view('customer.signup');
     }
 
@@ -62,7 +54,9 @@ class CustomerAuthController extends Controller
             cookie()->queue('customer_remember_token', $token, 60 * 24 * 30);
         }
 
-        return redirect()->route('customer.account')->with('success', 'Welcome back, ' . $customer->name . '!');
+        // Redirect to intended URL or default to account page
+        $intendedUrl = session()->pull('url.intended', route('customer.account'));
+        return redirect($intendedUrl)->with('success', 'Welcome back, ' . $customer->name . '!');
     }
 
     // Handle signup

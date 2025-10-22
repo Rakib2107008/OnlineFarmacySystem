@@ -336,7 +336,7 @@
         
         <ul class="sidebar-menu">
             <li>
-                <a href="{{ route('admin.products.index') }}" class="{{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <i class="fas fa-tachometer-alt"></i>
                     <span class="menu-text">Dashboard</span>
                 </a>
@@ -344,44 +344,47 @@
             <li>
                 <a href="{{ route('admin.products.index') }}" class="{{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
                     <i class="fas fa-box"></i>
-                    <span class="menu-text">Products</span>
+                    <span class="menu-text">Popular Products</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ route('admin.categories.index') }}" class="{{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
                     <i class="fas fa-tags"></i>
                     <span class="menu-text">Categories</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ route('admin.orders.index') }}" class="{{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="menu-text">Orders</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ route('admin.customers.index') }}" class="{{ request()->routeIs('admin.customers.*') ? 'active' : '' }}">
                     <i class="fas fa-users"></i>
                     <span class="menu-text">Customers</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ route('admin.prescriptions.index') }}" class="{{ request()->routeIs('admin.prescriptions.*') ? 'active' : '' }}">
+                    <i class="fas fa-file-prescription"></i>
+                    <span class="menu-text">Pending Prescriptions</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.analytics') }}" class="{{ request()->routeIs('admin.analytics') ? 'active' : '' }}">
                     <i class="fas fa-chart-line"></i>
                     <span class="menu-text">Analytics</span>
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class="fas fa-cog"></i>
-                    <span class="menu-text">Settings</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
+                <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt"></i>
                     <span class="menu-text">Logout</span>
                 </a>
+                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </li>
         </ul>
     </div>

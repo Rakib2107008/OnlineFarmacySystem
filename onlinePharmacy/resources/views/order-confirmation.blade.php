@@ -182,4 +182,12 @@
         }
     }
 </style>
+
+<script>
+  // Clear offer discount and phone from localStorage after successful order
+  document.addEventListener('DOMContentLoaded', function() {
+    localStorage.removeItem('offerDiscount');
+    localStorage.removeItem('offerPhone');
+  });
+</script>
 @endsection

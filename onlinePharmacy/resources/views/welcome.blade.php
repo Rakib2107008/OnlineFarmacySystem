@@ -26,10 +26,12 @@
   .category-slider { position:relative; padding:0 60px; }
   .category-grid { display:flex; gap:20px; overflow-x:auto; scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none; }
   .category-grid::-webkit-scrollbar{ display:none; }
+  .categoryLink { text-decoration: none !important; }
+  .categoryLink:hover { text-decoration: none !important; }
   .category-card { min-width:200px; background:white; border-radius:12px; padding:20px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.08); transition:.3s; cursor:pointer; flex-shrink:0; }
   .category-card:hover { transform:translateY(-8px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
   .category-img { width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:15px; }
-  .category-name { font-size:16px; font-weight:600; color:#333; margin:0; }
+  .category-name { font-size:16px; font-weight:600; color:#333; margin:0; text-decoration: none !important; }
   .slider-btn { position:absolute; top:50%; transform:translateY(-50%); width:45px; height:45px; background:white; border:none; border-radius:50%; box-shadow:0 2px 12px rgba(0,0,0,0.15); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:20px; color:#0066cc; transition:.3s; z-index:10; }
   .slider-btn:hover { background:#0066cc; color:white; }
   .slider-btn.prev-btn{ left:0; } .slider-btn.next-btn{ right:0; }
@@ -83,15 +85,64 @@
   .btn-add-cart{ width:100%; padding:12px; background:#0066cc; color:white; border:none; border-radius:6px; font-weight:600; cursor:pointer; transition:.3s; }
   .btn-add-cart:hover{ background:#0052a3; }
 
-  .offer-section{ padding:60px 0; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); }
-  .offer-card{ background:white; border-radius:16px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,0.15); transition:.3s; }
+  .offer-section{ padding:60px 0; background:skyblue; }
+  .offer-card{ 
+    background:white; 
+    border-radius:16px; 
+    overflow:hidden; 
+    box-shadow:0 8px 20px rgba(0,0,0,0.15); 
+    transition:.3s;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
   .offer-card:hover{ transform:translateY(-8px); }
-  .offer-img{ width:100%; height:250px; object-fit:cover; }
-  .offer-content{ padding:30px; }
-  .offer-title{ font-size:24px; font-weight:700; color:#333; margin-bottom:10px; }
-  .offer-text{ font-size:16px; color:#666; margin-bottom:20px; }
-  .btn-offer{ background:#ff9800; color:white; padding:12px 30px; border:none; border-radius:6px; font-weight:600; cursor:pointer; transition:.3s; }
-  .btn-offer:hover{ background:#f57c00; }
+  .offer-img{ 
+    width: 50%; 
+    height: 350px; 
+    object-fit:cover; 
+    flex-shrink: 0;
+  }
+  .offer-content{ 
+    padding:40px; 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .offer-title{ font-size:28px; font-weight:700; color:#333; margin-bottom:15px; }
+  .offer-text{ font-size:16px; color:#666; margin-bottom:25px; line-height: 1.6; }
+  .btn-offer{ 
+    background:#ff9800; 
+    color:white; 
+    padding:14px 35px; 
+    border:none; 
+    border-radius:8px; 
+    font-weight:600; 
+    cursor:pointer; 
+    transition:.3s;
+    font-size: 16px;
+    align-self: flex-start;
+  }
+  .btn-offer:hover{ background:#f57c00; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4); }
+  
+  @media (max-width: 768px) {
+    .offer-card {
+      flex-direction: column;
+    }
+    .offer-img {
+      width: 100%;
+      height: 250px;
+    }
+    .offer-content {
+      padding: 25px;
+    }
+    .offer-title {
+      font-size: 22px;
+    }
+  }
 </style>
 
 <section class="slider-sec">
@@ -186,12 +237,7 @@
             <h3 class="category-name">Personal Care</h3>
           </div>
         </a>
-        <a href="{{ route('sexualWellbeing') }}" class="categoryLink">
-          <div class="category-card">
-            <img src="{{ asset('Images/wellbeing.jpg') }}" alt="Sexual Wellbeing" class="category-img">
-            <h3 class="category-name">Sexual Wellbeing</h3>
-          </div>
-        </a>
+       
         <a href="{{ route('vitaminSupplyments') }}" class="categoryLink">
           <div class="category-card">
             <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400" alt="Vitamin & Supplements" class="category-img">
@@ -210,6 +256,12 @@
             <h3 class="category-name">Baby & Mom</h3>
           </div>
         </a>
+         <a href="{{ route('reproductiveWellbeing') }}" class="categoryLink">
+          <div class="category-card">
+            <img src="{{ asset('Images/wellbeing.jpg') }}" alt="Reproductive Wellbeing" class="category-img">
+            <h3 class="category-name">Reproductive Wellbeing</h3>
+          </div>
+        </a>
       </div>
       <button class="slider-btn next-btn" onclick="scrollCategories('right')"><i class="fas fa-chevron-right"></i></button>
     </div>
@@ -226,26 +278,12 @@
 <section class="offer-section">
   <div class="container">
     <h2 class="section-title" style="color: white; text-align: center; margin-bottom: 40px;">Special Offers</h2>
-    <div class="row">
-      <div class="col-md-6 mb-4">
-        <div class="offer-card">
-          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600" alt="Offer" class="offer-img">
-          <div class="offer-content">
-            <h3 class="offer-title">Flat 50% Off on First Order</h3>
-            <p class="offer-text">Get amazing discounts on your first medicine purchase. Limited time offer!</p>
-            <button class="btn-offer">Shop Now</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-4">
-        <div class="offer-card">
-          <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=600" alt="Offer" class="offer-img">
-          <div class="offer-content">
-            <h3 class="offer-title">Free Health Checkup</h3>
-            <p class="offer-text">Book your free health checkup with any purchase above ৳2000. Expert doctors available.</p>
-            <button class="btn-offer">Book Now</button>
-          </div>
-        </div>
+    <div class="offer-card">
+      <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600" alt="Offer" class="offer-img">
+      <div class="offer-content">
+        <h3 class="offer-title">Flat 50% Off on First Order</h3>
+        <p class="offer-text">Get amazing discounts on your first medicine purchase. Limited time offer! New customers only.</p>
+        <button class="btn-offer" onclick="handleOfferClick()">Shop Now</button>
       </div>
     </div>
   </div>
@@ -399,13 +437,57 @@ document.querySelectorAll('.category-card').forEach(card => {
   });
 });
 
-// Offer buttons
-document.querySelectorAll('.btn-offer').forEach(button => {
-  button.addEventListener('click', function() {
-    const offerTitle = this.closest('.offer-content')?.querySelector('.offer-title')?.textContent || 'Offer';
-    alert(`Offer activated: ${offerTitle}`);
+// Offer Shop Now functionality
+function handleOfferClick() {
+  // Check if cart is empty
+  const cartData = localStorage.getItem('pharmacyCart');
+  const cart = cartData ? JSON.parse(cartData) : { items: [] };
+  
+  if (!cart.items || cart.items.length === 0) {
+    alert('Please add items to your cart first before applying the offer.');
+    return;
+  }
+  
+  // Ask for phone number
+  const phone = prompt('Enter your phone number to check eligibility for 50% discount:');
+  
+  if (!phone) {
+    return; // User cancelled
+  }
+  
+  // Validate phone number
+  if (phone.length < 10) {
+    alert('Please enter a valid phone number.');
+    return;
+  }
+  
+  // Check eligibility via API
+  fetch('{{ route("offer.checkEligibility") }}', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    },
+    body: JSON.stringify({ phone: phone })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.eligible) {
+      // Store discount in localStorage
+      localStorage.setItem('offerDiscount', '0.5');
+      localStorage.setItem('offerPhone', phone);
+      alert(data.message);
+      // Redirect to cart
+      window.location.href = '{{ route("cart") }}';
+    } else {
+      alert(data.message);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred. Please try again.');
   });
-});
+}
 
 // Price hover effect
 document.querySelectorAll('.current-price').forEach(price => {
